@@ -1,0 +1,86 @@
+<div class="login-signup-main">
+    <mat-card class="login-left-container" appearance="outlined">
+        <img mat-card-image src="2766594@2x.png" width="200px" alt="Online Book Shopping Image">
+        <div>
+            <p>ONLINE BOOK SHOPPING</p>
+        </div>
+    </mat-card>
+
+    <mat-card class="login-right-container" appearance="outlined">
+        <div class="button-row">
+            <div class="button-row-login">
+                <button (click)="login()">Login</button>
+                <hr *ngIf="isLoginMode">
+            </div>
+            <div class="button-row-login">
+                <button (click)="signup()">Signup</button>
+                <hr *ngIf="!isLoginMode">
+            </div>
+        </div>
+
+        <div *ngIf="isLoginMode" class="login-form">
+            <div class="login-email label-input">
+                <label for="loginEmail">Email</label>
+                <input type="email" id="loginEmail" matInput [formControl]="emailFormControl"
+                    placeholder="john.doe@example.com" required>
+            </div>
+            <div class="login-password label-input">
+                <label for="loginPassword">Enter your password</label>
+                <mat-form-field>
+                    <input id="loginPassword" matInput [type]="hide() ? 'password' : 'text'" required />
+                    <button matIconButton matSuffix (click)="clickEvent($event)" [attr.aria-label]="'Hide password'"
+                        [attr.aria-pressed]="hide()">
+                        <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                </mat-form-field>
+
+            </div>
+            <div class="forget-password-link">
+                <a href="">Forgot Password?</a>
+            </div>
+            <div>
+                <button matButton class="red-button">Login</button>
+            </div>
+            <div class="or-class">
+                <hr width="20px">
+                <span>OR</span>
+                <hr width="20px">
+            </div>
+
+            <div class="login-other-options">
+                <button class="facebook-button">Facebook</button>
+                <button class="google-button">Google</button>
+            </div>
+        </div>
+
+        <div *ngIf="!isLoginMode" class="signup-form">
+            <div class="login-full-name label-input">
+                <label for="signupNamel">Full Name</label>
+                <input type="text" id="signupName" matInput [formControl]="emailFormControl" placeholder="John Doe"
+                    required>
+            </div>
+            <div class="signup-email label-input">
+                <label for="signupEmail">Email</label>
+                <input type="email" id="signupEmail" matInput [formControl]="emailFormControl"
+                    placeholder="john.doe@example.com" required>
+            </div>
+            <mat-form-field>
+                <label for="signupPassword">Enter your password</label>
+                <input id="signupPassword" matInput [type]="hide() ? 'password' : 'text'" />
+                <button matIconButton matSuffix (click)="clickEvent($event)" [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hide()">
+                    <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+            </mat-form-field>
+
+            <div class="signup-phone label-input">
+                <label for="signupPhone">Email</label>
+                <input type="text" id="signuphone" matInput [formControl]="emailFormControl" placeholder="XXXXXXXXX"
+                    required>
+            </div>
+            <div>
+                <button class="red-button">Signup</button>
+            </div>
+        </div>
+    </mat-card>
+</div>

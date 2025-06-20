@@ -1,0 +1,33 @@
+.book-card-container {
+    width: 235px;
+    height: 275px;
+    border: 1px solid #E2E2E2;
+    padding: 0px;
+}
+
+.book-card-image {
+    width: 233px;
+    height: 172px;
+    background-color: #F5F5F5;
+
+    img {
+        display: block;
+        margin: auto;
+    }
+}
+
+.book-card-rating-container {
+    width: 33px;
+    height: 16px;
+    background: #388E3C 0% 0% no-repeat padding-box;
+    border-radius: 1px;
+    color: white;
+
+    span {
+        font-size: 10px/13px;
+    }
+
+    .fa-star{
+        height: 4px;
+    }
+}

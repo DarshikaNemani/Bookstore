@@ -1,0 +1,51 @@
+<div class="address-form">
+    <mat-form-field class="address-full-name">
+        <label for="addressName">Full Name</label>
+        <input type="text" id="signupName" matInput placeholder="Ex. John Doe">
+        @if (nameFormControl.hasError('name') && !nameFormControl.hasError('required')) {
+        <mat-error>Please enter a valid Full Name</mat-error>
+        }
+        @if (emailFormControl.hasError('required')) {
+        <mat-error>Full name is <strong>required</strong></mat-error>
+        }
+    </mat-form-field>
+    <mat-form-field class="login-full-name">
+        <label for="signupNumber">Mobile Number</label>
+        <input type="text" id="signupNumber" matInput placeholder="Ex. XXXXXXXXXX">
+        @if (nameFormControl.hasError('name') && !nameFormControl.hasError('required')) {
+        <mat-error>Please enter a valid Full Name</mat-error>
+        }
+        @if (emailFormControl.hasError('required')) {
+        <mat-error>Email is <strong>required</strong></mat-error>
+        }
+    </mat-form-field>
+    <mat-form-field class="feedback-input-box">
+        <textarea matInput placeholder="Write your review"></textarea>
+    </mat-form-field>
+    <mat-form-field class="address-full-name">
+        <label for="addressName">Full Name</label>
+        <input type="text" id="signupName" matInput placeholder="Ex. John Doe">
+        @if (nameFormControl.hasError('name') && !nameFormControl.hasError('required')) {
+        <mat-error>Please enter a valid Full Name</mat-error>
+        }
+        @if (emailFormControl.hasError('required')) {
+        <mat-error>Full name is <strong>required</strong></mat-error>
+        }
+    </mat-form-field>
+    <mat-form-field class="login-full-name">
+        <label for="signupNumber">Mobile Number</label>
+        <input type="text" id="signupNumber" matInput placeholder="Ex. XXXXXXXXXX">
+        @if (nameFormControl.hasError('name') && !nameFormControl.hasError('required')) {
+        <mat-error>Please enter a valid Full Name</mat-error>
+        }
+        @if (emailFormControl.hasError('required')) {
+        <mat-error>Email is <strong>required</strong></mat-error>
+        }
+    </mat-form-field>
+    <mat-radio-group aria-label="Select an option">
+        <mat-radio-button value="Home">Home</mat-radio-button>
+        <mat-radio-button value="Work">Work</mat-radio-button>
+        <mat-radio-button value="Other">Other</mat-radio-button>
+    </mat-radio-group>
+    <button matButton="filled">Continue</button>
+</div>
