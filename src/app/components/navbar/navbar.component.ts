@@ -12,7 +12,7 @@ import { RouterModule } from '@angular/router';
   styleUrl: './navbar.component.css',
 })
 export class NavbarComponent {
-  isProfileOpen = true;
+  isProfileOpen = false;
   toggleProfileDropdown() {
     this.isProfileOpen = !this.isProfileOpen;
   }

@@ -31,3 +31,8 @@
         height: 4px;
     }
 }
+
+.book-card-price, .book-card-rating-number, .book-card-author{
+    font-size: 10px;
+    color: #878787;
+}

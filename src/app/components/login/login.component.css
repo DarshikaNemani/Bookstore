@@ -27,6 +27,30 @@
   }
 }
 
+.login-password-input,
+.signup-password-input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .password-input {
+    border: none;
+    height: 33px;
+  }
+
+  .password-visibility-button {
+    border: none;
+    background-color: #fff;
+    height: 33px;
+    padding: 5px 11px;
+
+    mat-icon {
+      font-size: 20px;
+      color: #9D9D9D;
+    }
+  }
+}
+
 .login-right-container {
   width: 389px;
   height: 425px;
@@ -39,7 +63,7 @@
     display: flex;
     justify-content: space-between;
     margin-top: 28px;
-    margin-bottom: 22px;
+    margin-bottom: 7px;
 
     .button-row-login,
     .button-row-signup {
@@ -69,17 +93,28 @@
     color: var(--color-primary);
     display: flex;
     justify-content: start;
-
+    margin-top: 15px;
   }
 
   input {
+    padding: 11px 10px;
+  }
+
+  input,
+  .login-password-input,
+  .signup-password-input {
     width: 252px;
     height: 35px;
-    padding: 0px;
     margin: 0px;
     border: 1px solid #E2E2E2;
     border-radius: 2px;
   }
+
+  input:focus {
+    border: 1px solid #A03037;
+    outline: none;
+  }
+
 
   .label-input {
     display: flex;
@@ -132,36 +167,24 @@
       }
     }
   }
-    .red-button {
-      width: 100%;
-      height: 37px;
-      background-color: var(--color-maroon);
-      color: white;
-      border: none;
-      border-radius: 3px;
-      font-size: 14px;
-      font-weight: 500;
-    }
 
-    .red-button:disabled {
-      background-color: #ccc;
-      color: #666;
-      cursor: not-allowed;
-    }
-}
+  .red-button {
+    width: 100%;
+    height: 37px;
+    background-color: var(--color-maroon);
+    color: white;
+    border: none;
+    border-radius: 3px;
+    font-size: 14px;
+    font-weight: 500;
+    margin-top: 22px;
+  }
 
-/* Form field styling */
-mat-form-field {
-  width: 100%;
-  margin-bottom: 16px;
-}
-
-mat-form-field.mat-form-field {
-  font-size: 14px;
-}
-
-.mat-mdc-form-field {
-  width: 100%;
+  .red-button:disabled {
+    background-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+  }
 }
 
 /* Error message styling */
@@ -179,7 +202,7 @@ mat-error {
   justify-content: flex-end;
   width: 100%;
   padding: 0;
-  margin: 8px 0 16px 0;
+  margin: 3px 0 -8px 0;
   background: none;
   border: none;
 }

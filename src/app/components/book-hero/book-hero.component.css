@@ -1,0 +1,31 @@
+.book-hero-main {
+    display: flex;
+    flex-direction: row;
+
+    .book-hero-left {
+        display: flex;
+        flex-direction: row;
+
+        .side-image {
+            display: flex;
+            flex-direction: column;
+
+            img {
+                border: 1px solid #D1D1D1;
+                border-radius: 1px;
+                padding: 4.5px;
+                max-width: 34px;
+                max-height: 44px;
+            }
+        }
+
+        .main-image {
+            border: 1px solid #D1D1D1;
+            border-radius: 1px;
+            padding: 4.5px;
+            max-width: 34px;
+            max-height: 44px;
+        }
+
+    }
+}

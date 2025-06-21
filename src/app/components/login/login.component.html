@@ -26,20 +26,22 @@
             </div>
             <div class="login-password label-input">
                 <label for="loginPassword">Enter your password</label>
-                <mat-form-field>
-                    <input id="loginPassword" matInput [type]="hide() ? 'password' : 'text'" required />
+                <div class="login-password-input">
+                    <input id="loginPassword" class="password-input" [formControl]="passwordFormControl"
+                        [type]="hide() ? 'password' : 'text'" required>
                     <button matIconButton matSuffix (click)="clickEvent($event)" [attr.aria-label]="'Hide password'"
-                        [attr.aria-pressed]="hide()">
+                        [attr.aria-pressed]="hide()" class="password-visibility-button">
                         <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
                     </button>
-                </mat-form-field>
-
+                </div>
             </div>
             <div class="forget-password-link">
-                <a href="">Forgot Password?</a>
+                <button>Forgot Password?</button>
             </div>
             <div>
-                <button matButton class="red-button">Login</button>
+                <button matButton class="red-button" (click)="onLogin()" [disabled]="isLoading()">
+                    {{isLoading() ? 'Logging in...' : 'Login'}}
+                </button>
             </div>
             <div class="or-class">
                 <hr width="20px">
@@ -55,8 +57,8 @@
 
         <div *ngIf="!isLoginMode" class="signup-form">
             <div class="login-full-name label-input">
-                <label for="signupNamel">Full Name</label>
-                <input type="text" id="signupName" matInput [formControl]="emailFormControl" placeholder="John Doe"
+                <label for="signupName">Full Name</label>
+                <input type="text" id="signupName" matInput [formControl]="nameFormControl" placeholder="John Doe"
                     required>
             </div>
             <div class="signup-email label-input">
@@ -64,22 +66,28 @@
                 <input type="email" id="signupEmail" matInput [formControl]="emailFormControl"
                     placeholder="john.doe@example.com" required>
             </div>
-            <mat-form-field>
+            <div class="signup-password label-input">
                 <label for="signupPassword">Enter your password</label>
-                <input id="signupPassword" matInput [type]="hide() ? 'password' : 'text'" />
-                <button matIconButton matSuffix (click)="clickEvent($event)" [attr.aria-label]="'Hide password'"
-                    [attr.aria-pressed]="hide()">
-                    <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
-                </button>
-            </mat-form-field>
+                <div class="signup-password-input">
+                    <input id="signupPassword" class="password-input" matInput [formControl]="passwordFormControl"
+                        [type]="hide() ? 'password' : 'text'" />
+                    <button class="password-visibility-button" matSuffix (click)="clickEvent($event)"
+                        [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide()">
+                        <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+
+                </div>
+            </div>
 
             <div class="signup-phone label-input">
-                <label for="signupPhone">Email</label>
-                <input type="text" id="signuphone" matInput [formControl]="emailFormControl" placeholder="XXXXXXXXX"
+                <label for="signupPhone">Phone Number</label>
+                <input type="text" id="signupPhone" matInput [formControl]="phoneFormControl" placeholder="1234567890"
                     required>
             </div>
             <div>
-                <button class="red-button">Signup</button>
+                <button class="red-button" (click)="onSignup()" [disabled]="isLoading()">
+                    {{isLoading() ? 'Creating Account...' : 'Signup'}}
+                </button>
             </div>
         </div>
     </mat-card>

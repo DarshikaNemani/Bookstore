@@ -1,7 +1,6 @@
-<!-- <app-navbar/> -->
-<!-- <p>Books<span>(128 items)</span></p> -->
-<!-- <app-book-card/> -->
-<!-- <app-forgot-password/> -->
-<!-- <app-footer/> -->
-<app-login/>
-<!-- <app-address-form/> -->
+<app-navbar/>
+<p>Books<span>({{books.length}} items)</span></p>
+<div class="books-display">
+    <app-book-card *ngFor="let book of books" [book] = "book"/>
+</div>
+<app-footer/>

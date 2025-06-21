@@ -1,3 +1,53 @@
+.feedback-main {
+  i {
+    width: 20px;
+    height: 20px;
+  }
+
+  .feedback-form-container {
+    padding: 15px;
+    width: 557px;
+    height: 192px;
+    border-radius: 2px;
+    background-color: #F5F5F5;
+
+    p {
+      font-size: 12px;
+    }
+
+    input {
+      width: 527px;
+      height: 63px;
+      border-radius: 3px;
+      border: none;
+    }
+
+    button {
+      justify-content: end;
+      align-items: end  ;
+      width: 76px;
+      height: 24px;
+      font-size: 14px;
+      color: #fff;
+      background-color: var(--color-blue);
+      border: none;
+      border-radius: 2px;
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 .feedback-form {
   min-width: 150px;
   max-width: 500px;
