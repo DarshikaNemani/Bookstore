@@ -1,31 +1,106 @@
 .book-hero-main {
+  display: flex;
+  flex-direction: row;
+
+  .book-hero-left {
     display: flex;
     flex-direction: row;
+    margin-right: 50px;
 
-    .book-hero-left {
-        display: flex;
-        flex-direction: row;
+    .side-image {
+      display: flex;
+      flex-direction: column;
 
-        .side-image {
-            display: flex;
-            flex-direction: column;
-
-            img {
-                border: 1px solid #D1D1D1;
-                border-radius: 1px;
-                padding: 4.5px;
-                max-width: 34px;
-                max-height: 44px;
-            }
-        }
-
-        .main-image {
-            border: 1px solid #D1D1D1;
-            border-radius: 1px;
-            padding: 4.5px;
-            max-width: 34px;
-            max-height: 44px;
-        }
-
+      img {
+        border: 1px solid #d1d1d1;
+        border-radius: 1px;
+        padding: 4.5px;
+        max-width: 34px;
+        max-height: 44px;
+      }
     }
+
+    .main-image {
+      border: 1px solid #d1d1d1;
+      border-radius: 2px;
+      padding: 23px 40px;
+      max-width: 281px;
+      max-height: 367px;
+    }
+  }
+
+  .book-hero-right {
+    .book-hero-name {
+      font-size: 28px;
+      color: var(--color-primary);
+      margin-bottom: 3px;
+    }
+
+    .book-hero-author {
+      font-size: 18px;
+      color: #878787;
+      margin-bottom: 10px;
+    }
+
+    .book-hero-rating-main {
+      margin-bottom: 15px;
+    }
+
+    .book-hero-rating-container {
+      width: 55px;
+      height: 25px;
+      background-color: #388e3c;
+      border-radius: 1px;
+      color: #fff;
+
+      span {
+        font-size: 14px;
+      }
+
+      .fa-star {
+        height: 4px;
+      }
+    }
+
+    .book-hero-rating-number,
+    .book-hero-price {
+      color: #878787;
+      font: 15px;
+    }
+
+    .book-hero-discount {
+      color: var(--color-primary);
+      font-size: 30px;
+    }
+
+    .book-hero-head {
+      color: #878787;
+      display: flex;
+      align-items: center;
+    }
+
+    .svg-bullet {
+      display: inline-block;
+      width: 5px;
+      height: 5px;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="grey"/></svg>');
+      background-repeat: no-repeat;
+      background-size: contain;
+      vertical-align: middle;
+      margin-right: 3px;
+    }
+
+    .book-hero-description {
+      max-width: 542px;
+      font-size: 12px;
+      margin: 3px 0px 0px 9px;
+    }
+
+    .book-hero-description-container {
+      margin: 17px 0px;
+      border-top: 2px solid #9d9d9d;
+      border-bottom: 2px solid #9d9d9d;
+      padding: 33.5px 0px;
+    }
+  }
 }

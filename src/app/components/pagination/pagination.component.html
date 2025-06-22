@@ -1,0 +1,35 @@
+<div class="pagination-container" *ngIf="totalPages > 1">
+    <!-- Previous Button -->
+    <button class="pagination-btn prev-btn" [disabled]="currentPage === 1" (click)="onPrevious()">
+        <span class="arrow-left">‹</span>
+    </button>
+
+    <!-- First Page -->
+    <button *ngIf="showFirstPage" class="pagination-btn page-btn" [class.active]="currentPage === 1"
+        (click)="onPageChange(1)">
+        1
+    </button>
+
+    <!-- Ellipsis Start -->
+    <span *ngIf="showEllipsisStart" class="ellipsis">...</span>
+
+    <!-- Visible Pages -->
+    <button *ngFor="let page of visiblePages" class="pagination-btn page-btn" [class.active]="currentPage === page"
+        (click)="onPageChange(page)">
+        {{ page }}
+    </button>
+
+    <!-- Ellipsis End -->
+    <span *ngIf="showEllipsisEnd" class="ellipsis">...</span>
+
+    <!-- Last Page -->
+    <button *ngIf="showLastPage" class="pagination-btn page-btn" [class.active]="currentPage === totalPages"
+        (click)="onPageChange(totalPages)">
+        {{ totalPages }}
+    </button>
+
+    <!-- Next Button -->
+    <button class="pagination-btn next-btn" [disabled]="currentPage === totalPages" (click)="onNext()">
+        <span class="arrow-right">›</span>
+    </button>
+</div>

@@ -1,6 +1,13 @@
-<app-navbar/>
-<p>Books<span>({{books.length}} items)</span></p>
-<div class="books-display">
-    <app-book-card *ngFor="let book of books" [book] = "book"/>
+<app-navbar />
+<div class="home-container">
+    <p>Books<span>({{totalItems}} items)</span></p>
+    <div class="home-book-container">
+        <app-book-card *ngFor="let book of displayedBooks" [book]="book" />
+    </div>
+
+    <app-pagination [currentPage]="currentPage" [totalItems]="totalItems" [itemsPerPage]="itemsPerPage"
+        (pageChange)="onPageChange($event)">
+    </app-pagination>
+
 </div>
-<app-footer/>
+<app-footer />

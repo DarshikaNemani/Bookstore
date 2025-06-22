@@ -1,6 +1,6 @@
 .book-card-container {
     width: 235px;
-    height: 275px;
+    /* height: 275px; */
     border: 1px solid #E2E2E2;
     padding: 0px;
 }
@@ -17,11 +17,11 @@
 }
 
 .book-card-rating-container {
-    width: 33px;
-    height: 16px;
-    background: #388E3C 0% 0% no-repeat padding-box;
+    width: 25%;
+    background-color: #388E3C;
     border-radius: 1px;
     color: white;
+    padding: 2px 4px;
 
     span {
         font-size: 10px/13px;
@@ -35,4 +35,11 @@
 .book-card-price, .book-card-rating-number, .book-card-author{
     font-size: 10px;
     color: #878787;
+}
+
+.book-card-details {
+    padding: 10px 20px 16px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
 }
