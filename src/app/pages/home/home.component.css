@@ -22,3 +22,30 @@
   gap: 28px;
   justify-content: space-evenly;
 }
+
+.loader-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+  padding: 40px 0;
+}
+
+.loader-container p {
+  color: #666;
+  font-size: 16px;
+  margin-top: 16px;
+}
+
+/* Responsive loader */
+@media (max-width: 768px) {
+  .loader-container {
+    min-height: 300px;
+    padding: 30px 0;
+  }
+
+  .loader-container p {
+    font-size: 14px;
+  }
+}

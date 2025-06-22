@@ -11,6 +11,7 @@ import { PaginationComponent } from '../../components/pagination/pagination.comp
 import { ProductService } from '../../services/product.service';
 import { CommonModule } from '@angular/common';
 import { Book } from '../../services/models';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-home',
@@ -25,6 +26,7 @@ import { Book } from '../../services/models';
     FeedbackComponent,
     PaginationComponent,
     CommonModule,
+    MatProgressSpinnerModule,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
@@ -34,6 +36,7 @@ export class HomeComponent implements OnInit {
   displayedBooks: Book[] = [];
   currentPage: number = 1;
   itemsPerPage: number = 12;
+  isLoading: boolean = false;
 
   constructor(private productService: ProductService) {}
 
@@ -42,8 +45,10 @@ export class HomeComponent implements OnInit {
   }
 
   loadbooks(): void {
+    this.isLoading = true;
     this.productService.loadProducts().subscribe({
       next: (response) => {
+        this.isLoading = false;
         if (response.success && response.result) {
           this.allBooks = response.result;
           this.updateDisplayedBooks();
@@ -54,6 +59,7 @@ export class HomeComponent implements OnInit {
         }
       },
       error: (error)=>{
+        this.isLoading = false;
         console.error('Error loading: ', error)
       }
     });
