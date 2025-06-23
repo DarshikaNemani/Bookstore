@@ -1,4 +1,80 @@
-.address-form{
+.address-form-container {
     width: 774px;
-    height: 410px;
+    height: 486px;
+    border-radius: 1px;
+    border: 1px solid #DCDCDC;
+    padding: 17px 34px 36px 36px;
+
+    .address-form-title-main {
+        display: flex;
+        justify-content: space-between;
+
+        .address-form-title {
+            font-size: 18px;
+            color: #333232;
+        }
+
+        .add-new-address-button {
+            color: var(--color-maroon);
+            background-color: #fff;
+            border: 1px solid var(--color-maroon);
+            padding: 9.5px 27.5px;
+        }
+    }
+
+    .label-input {
+        display: flex;
+        flex-direction: column;
+    }
+
+    label,
+    .type-title {
+        font-size: 12px;
+        color: var(--color-text-primary);
+        display: flex;
+        justify-content: start;
+        margin-bottom: 2px;
+    }
+
+    input {
+        padding: 11px 10px;
+        width: 251px;
+        height: 45px;
+        margin-bottom: 16px;
+    }
+
+    .address-form {
+        width: 512px;
+    }
+
+    .address-form-user-details,
+    .address-form-city-state {
+        display: flex;
+        justify-content: space-between;
+
+    }
+
+    .address-form-address input {
+        height: 82px;
+        width: 512px;
+    }
+
+    .blue-button {
+        width: 150px;
+        height: 35px;
+        padding: 9px 39px;
+    }
+
+    .button-row {
+        display: flex;
+        justify-content: end;
+        align-items: end;
+    }
+
+    mat-radio-button {
+        font-size: 12px;
+        color: var(--color-text-primary);
+        margin-bottom: 2px;
+        margin-right: 85px;
+    }
 }
