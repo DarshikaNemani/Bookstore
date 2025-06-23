@@ -16,3 +16,9 @@ export interface ProductsResponse {
   message: string;
   result: Book[];
 }
+
+export interface BookResponse {
+  success: boolean;
+  message: string;
+  result: Book;
+}

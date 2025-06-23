@@ -1,4 +1,4 @@
-<div class="book-card-container">
+<div class="book-card-container" (click)="onProductClick()" style="cursor: pointer;">
     <div class="book-card-image">
         <img [src]="book?.bookImage || 'Image 7.png'" alt="{{book?.bookName || 'Book Image'}}">
     </div>

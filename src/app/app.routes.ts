@@ -4,6 +4,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { LoginPageComponent } from './pages/login/login.component';
 import { authGuard } from './guards/auth.guard';
 import { DevComponent } from './pages/dev/dev.component';
+import { BookHeroComponent } from './components/book-hero/book-hero.component';
 
 export const routes: Routes = [
   {
@@ -23,6 +24,10 @@ export const routes: Routes = [
     path: '',
     redirectTo: '/home',
     pathMatch: 'full'
+  },
+  {
+    path: 'book-details/:id',
+    component: BookHeroComponent
   },
   {
     path: 'dev',

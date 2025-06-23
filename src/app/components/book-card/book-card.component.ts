@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-book-card',
@@ -10,4 +11,12 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class BookCardComponent {
   @Input() book: any;
+
+  constructor(private router: Router) {}
+
+  onProductClick(): void {
+    if (this.book && this.book._id) {
+      this.router.navigate(['/book-details', this.book._id]);
+    }
+  }
 }
