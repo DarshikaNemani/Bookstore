@@ -13,10 +13,10 @@
     justify-content: center;
     min-width: 40px;
     height: 40px;
-    border: 1px solid #e0e0e0;
+    border: none;
     background-color: #ffffff;
-    color: #333333;
-    border-radius: 8px;
+    color: #878787;
+    border-radius: 1px;
     cursor: pointer;
     font-size: 14px;
     font-weight: 500;
@@ -52,6 +52,8 @@
     width: 40px;
     font-size: 18px;
     font-weight: 600;
+    border-radius: 50%;
+    border: 1px solid #E2E2E2;
 }
 
 .arrow-left,
