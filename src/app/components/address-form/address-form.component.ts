@@ -38,4 +38,8 @@ export class AddressFormComponent {
     Validators.required,
     Validators.maxLength(50),
   ]);
+    phoneFormControl = new FormControl('', [
+    Validators.required,
+    Validators.pattern(/^[0-9]{10}$/),
+  ]);
 }

@@ -22,3 +22,9 @@ export interface BookResponse {
   message: string;
   result: Book;
 }
+
+export interface FeedbackResponse{
+  success: boolean;
+  message: string;
+  result?: any[];
+}

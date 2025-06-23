@@ -5,6 +5,8 @@ import { LoginPageComponent } from './pages/login/login.component';
 import { authGuard } from './guards/auth.guard';
 import { DevComponent } from './pages/dev/dev.component';
 import { BookHeroComponent } from './components/book-hero/book-hero.component';
+import { OrderComponent } from './pages/order/order.component';
+import { AddressFormComponent } from './components/address-form/address-form.component';
 
 export const routes: Routes = [
   {
@@ -14,6 +16,11 @@ export const routes: Routes = [
   {
     path: 'user',
     component: UserProfileComponent,
+    canActivate: [authGuard]
+  },
+  {
+    path: 'order',
+    component: OrderComponent,
     canActivate: [authGuard]
   },
   {
@@ -31,7 +38,7 @@ export const routes: Routes = [
   },
   {
     path: 'dev',
-    component: DevComponent
+    component: AddressFormComponent
   },
   {
     path: '**',

@@ -4,30 +4,43 @@
         <div class="feedback-form-container">
             <p>Overall Rating</p>
             <div class="feedback-stars">
-                <i class="fa-regular fa-star"></i>
-                <i class="fa-regular fa-star"></i>
-                <i class="fa-regular fa-star"></i>
-                <i class="fa-regular fa-star"></i>
-                <i class="fa-regular fa-star"></i>
+                <i *ngFor="let star of [1,2,3,4,5]; let i = index"
+                    [class]="bookRating > i ? 'fa-solid fa-star' : 'fa-regular fa-star'" (click)="selectRating(i + 1)"
+                    style="cursor: pointer; color: #ffa500;">
+                </i>
             </div>
             <div class="feedback-input-box">
-                <input type="text" placeholder="Write your review" />
+                <input type="text" 
+                       placeholder="Write your review" 
+                       [(ngModel)]="reviewContent"
+                       [disabled]="isSubmit" />
             </div>
-            <button matButton="filled">Submit</button>
+            <button class="blue-button" 
+        (click)="onSubmit()"
+        [disabled]="isSubmit">
+    {{ isSubmit ? 'Submitting...' : 'Submit' }}
+</button>
         </div>
     </div>
-    <div class="feedback-display">
-        <div class="feedback-username-details">
-            <img src="2766594.png" alt="" width="100px">
-            <p class="feedback-username">username</p>
+     <div class="feedback-display">
+        <div *ngIf="isLoading" class="loading">Loading feedbacks...</div>
+        
+        <div *ngFor="let feedback of feedbackList" class="feedback-item">
+            <div class="feedback-username-details">
+                <img src="2766594.png" alt="" width="100px">
+                <p class="feedback-username">{{ feedback.user_id || 'Anonymous' }}</p>
+            </div>
+            <div class="user-feedback-stars">
+                <i *ngFor="let star of getStarsArray(feedback.rating)" 
+                   [class]="star ? 'fa-solid fa-star' : 'fa-regular fa-star'"
+                   style="color: #ffa500;">
+                </i>    
+            </div>
+            <p class="user-feedback-review">{{ feedback.comment }}</p>
         </div>
-        <div class="user-feedback-stars">
-            <i class="fa-regular fa-star"></i>
-            <i class="fa-regular fa-star"></i>
-            <i class="fa-regular fa-star"></i>
-            <i class="fa-regular fa-star"></i>
-            <i class="fa-regular fa-star"></i>
+
+        <div *ngIf="feedbackList.length === 0 && !isLoading" class="no-feedback">
+            No feedback available for this product.
         </div>
-        <p class="user-feedback-review">Review</p>
     </div>
 </div>

@@ -32,16 +32,12 @@
       margin: 14px 0px;
     }
 
-    button {
+    .blue-button {
       justify-content: end;
-      align-items: end  ;
+      align-items: end;
       width: 76px;
       height: 24px;
       font-size: 14px;
-      color: #fff;
-      background-color: var(--color-blue);
-      border: none;
-      border-radius: 2px;
     }
   }
   .feedback-display{
