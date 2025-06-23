@@ -1,6 +1,6 @@
 <div class="order-success-container">
     <p class="order-success-head">Order placed successfully</p>
-    <p class="order-success-content">Hurray!!! Your order is confirmed, the order id is #123456. Save the order id for
+    <p class="order-success-content">Hurray!!! Your order is confirmed, the order id is {{orderId}}. Save the order id for
         further communication.</p>
     <div class="order-success-table">
         <table>
@@ -20,6 +20,6 @@
         </table>
     </div>
     <div>
-        <button class="blue-button">CONTINUE SHOPPING</button>
+        <button class="blue-button" (click)="continueShopping()">CONTINUE SHOPPING</button>
     </div>
 </div>
