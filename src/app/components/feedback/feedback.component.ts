@@ -4,6 +4,7 @@ import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { Feedback, FeedbackResponse } from '../../services/models';
 
 @Component({
   selector: 'app-feedback',
@@ -17,7 +18,7 @@ export class FeedbackComponent implements OnInit{
   bookRating: number = 0;
   reviewContent: string = '';
   isSubmit: boolean = false;
-  feedbackList : any[] = [];
+  feedbackList : Feedback[] = [];
   isLoading: boolean = false;
 
   constructor(private feedbackService: FeebackService, private authService: AuthService){}
@@ -54,13 +55,16 @@ export class FeedbackComponent implements OnInit{
         this.isSubmit = false;
         console.log('Feedback Submitted', response);
 
+        // Reset form
         this.bookRating = 0;
         this.reviewContent = '';
+        
+        // Reload feedbacks to show the new one
         this.loadFeedbacks();
       },
       error: (error) => {
         this.isSubmit = false;
-        console.log('Error loading feedbacks:', error);
+        console.log('Error submitting feedback:', error);
         if(error.status === 401){
           alert('Session expired. Please login again.');
           this.authService.logout();
@@ -78,15 +82,21 @@ export class FeedbackComponent implements OnInit{
 
     this.isLoading = true;
     this.feedbackService.loadFeedback(this.productId).subscribe({
-      next: (response) => {
+      next: (response: FeedbackResponse) => {
         this.isLoading = false;
         if(response.success && response.result){
-          this.feedbackList = response.result;
+          this.feedbackList = response.result.sort((a, b) => 
+            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+          );
         }
       },
       error: (error) => {
         this.isLoading = false;
         console.error('Error loading feedbacks:', error);
+        if(error.status === 401){
+          alert('Session expired. Please login again.');
+          this.authService.logout();
+        }
       }
     });
   }

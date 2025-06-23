@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class HttpService {
-  private baseUrl = 'https://bookstore.incubation.bridgelabz.com/bookstore_app/swagger/api/#/bookstore_user';
+  private baseUrl = 'https://bookstore.incubation.bridgelabz.com';
 
   constructor(private http: HttpClient) {}
 
@@ -14,7 +14,7 @@ export class HttpService {
     const token = localStorage.getItem('authToken') || '';
     return new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: token,
+      'x-access-token': token,
     });
   }
   //Basic CRUD operations
@@ -38,6 +38,13 @@ export class HttpService {
 
   deleteApi(endpoint: string): Observable<any> {
     return this.http.delete(`${this.baseUrl}${endpoint}`, {
+      headers: this.getHeaders(),
+    });
+  }
+
+  // Order API
+  placeOrder(orderData: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/bookstore_user/add/order`, orderData, {
       headers: this.getHeaders(),
     });
   }

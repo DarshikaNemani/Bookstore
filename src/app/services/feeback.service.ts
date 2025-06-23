@@ -14,13 +14,18 @@ export class FeebackService {
   private getHeaders(): HttpHeaders {
     const token = this.authService.getToken();
     return new HttpHeaders({
-      'Authorization': `${token}`,
-      'Content-Type': 'application/json'
+      'x-access-token': `${token}`,
+      'Content-Type': 'application/json',
+      'accept': 'application/json'
     });
   }
 
   addFeedback(product_id: string, payload: { comment: string; rating: number; }): Observable<any> {
-    return this.http.post(`${this.baseUrl}/bookstore_user/add/feedback/${product_id}`, payload, { headers: this.getHeaders() });
+    const apiPayload = {
+      comment: payload.comment,
+      rating: payload.rating.toString()
+    };
+    return this.http.post(`${this.baseUrl}/bookstore_user/add/feedback/${product_id}`, apiPayload, { headers: this.getHeaders() });
   }
 
   loadFeedback(product_id: string): Observable<any> {
