@@ -1,0 +1,63 @@
+<div class="wishlist-page">
+    <app-navbar></app-navbar>
+
+    <div class="wishlist-container">
+        <div class="breadcrumb">
+            <span routerLink="/home" class="breadcrumb-link">Home</span>
+            <span class="breadcrumb-separator">/</span>
+            <span class="breadcrumb-current">My Wishlist</span>
+        </div>
+
+        <div class="wishlist-header">
+            <h2>My Wishlist ({{ wishlistCount.toString().padStart(2, '0') }})</h2>
+        </div>
+
+        <div class="wishlist-content">
+            <div *ngIf="isLoading" class="loading-container">
+                <mat-spinner diameter="40"></mat-spinner>
+                <p>Loading wishlist items...</p>
+            </div>
+
+            <div *ngIf="!isLoading && wishlistItems.length === 0" class="empty-wishlist">
+                <div class="empty-message">
+                    <h3>Your wishlist is empty</h3>
+                    <p>Save items you're interested in to your wishlist</p>
+                    <button mat-raised-button color="primary" routerLink="/home">
+                        Continue Shopping
+                    </button>
+                </div>
+            </div>
+
+            <div *ngIf="!isLoading && wishlistItems.length > 0" class="wishlist-items">
+                <div *ngFor="let item of wishlistItems" class="wishlist-item">
+                    <div class="item-image">
+                        <img src="Image 7.png" [alt]="item.product_id.bookName">
+                    </div>
+
+                    <div class="item-details">
+                        <h3 class="item-title">{{ item.product_id.bookName }}</h3>
+                        <p class="item-author">by {{ item.product_id.author }}</p>
+
+                        <div class="item-pricing">
+                            <span class="current-price">Rs. {{ item.product_id.discountPrice }}</span>
+                            <span class="original-price"
+                                *ngIf="item.product_id.price !== item.product_id.discountPrice">
+                                Rs. {{ item.product_id.price }}
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="item-actions">
+                        <button mat-icon-button class="remove-button" (click)="removeFromWishlist(item.product_id._id)"
+                            [disabled]="isRemoving === item.product_id._id" title="Remove from wishlist">
+                            <mat-icon *ngIf="isRemoving !== item.product_id._id">delete</mat-icon>
+                            <mat-spinner *ngIf="isRemoving === item.product_id._id" diameter="20"></mat-spinner>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <app-footer></app-footer>
+</div>
