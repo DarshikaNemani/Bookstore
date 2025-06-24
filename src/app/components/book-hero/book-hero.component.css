@@ -26,6 +26,29 @@
       padding: 23px 40px;
       max-width: 281px;
       max-height: 367px;
+      margin-bottom: 20px;
+    }
+  }
+
+  .main-image-button-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 15px;
+
+    button {
+      align-items: center;
+      width: 170px;
+      height: 40px;
+    }
+
+    .wishlist-button {
+      color: #fff;
+      border: none;
+      background-color: #333;
+
+      i {
+        margin-right: 15.5px;
+      }
     }
   }
 
@@ -44,6 +67,8 @@
 
     .book-hero-rating-main {
       margin-bottom: 15px;
+      display: flex;
+      align-items: center;
     }
 
     .book-hero-rating-container {
@@ -52,6 +77,9 @@
       background-color: #388e3c;
       border-radius: 1px;
       color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
       span {
         font-size: 14px;
@@ -59,6 +87,7 @@
 
       .fa-star {
         height: 4px;
+        margin-left: 5.5px;
       }
     }
 

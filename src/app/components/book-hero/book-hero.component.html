@@ -8,18 +8,25 @@
         <img src="Image 7.png" />
         <img src="Image 7.png" />
       </div>
-      <div class="main-image">
-        <img src="Image 7@2x.png" />
+      <div class="main-image-contaner">
+        <div class="main-image">
+          <img src="Image 7@2x.png" />
+        </div>
+        <div class="main-image-button-row">
+          <button class="red-button">ADD TO BAG</button>
+          <button class="wishlist-button"><i class="fa-regular fa-heart"></i>WISHLIST</button>
+        </div>
       </div>
     </div>
+
     <div class="book-hero-right">
       <p class="book-hero-name">{{ book?.bookName || 'Unknown Title' }}</p>
       <p class="book-hero-author">by {{ book?.author || 'Unknown Author' }}</p>
       <div class="book-hero-rating-main">
-        <span class="book-hero-rating-container">
-          <span class="book-hero-rating">4.5</span>
-          <span><i class="fas fa-star"></i></span>
-        </span>
+        <div class="book-hero-rating-container">
+          <p class="book-hero-rating">4.5</p>
+          <p><i class="fas fa-star fa-2xs"></i></p>
+        </div>
         <span class="book-hero-rating-number">(20)</span>
       </div>
       <div class="book-hero-price-container">
@@ -33,10 +40,10 @@
           <span class="svg-bullet"></span> Book Detail
         </div>
         <p class="book-hero-description">
-          {{book?.description}}  
+          {{book?.description}}
         </p>
       </div>
-      <app-feedback [productId]="book._id"/>
+      <app-feedback [productId]="book._id" />
     </div>
   </div>
 </div>
