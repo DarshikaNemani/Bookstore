@@ -4,10 +4,12 @@ import { CommonModule } from '@angular/common';
 import { AddressFormComponent } from "../../components/address-form/address-form.component";
 import { HttpService } from '../../services/http.service';
 import { OrderRequest, OrderItem } from '../../services/models';
+import { NavbarComponent } from "../../components/navbar/navbar.component";
+import { FooterComponent } from "../../components/footer/footer.component";
 
 @Component({
   selector: 'app-order',
-  imports: [AddressFormComponent, CommonModule],
+  imports: [AddressFormComponent, CommonModule, NavbarComponent, FooterComponent],
   templateUrl: './order.component.html',
   styleUrl: './order.component.css'
 })

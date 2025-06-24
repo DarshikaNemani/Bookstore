@@ -1,6 +1,9 @@
 <div class="book-card-container" (click)="onProductClick()" style="cursor: pointer;">
     <div class="book-card-image">
         <img [src]="book?.bookImage || 'Image 7.png'" alt="{{book?.bookName || 'Book Image'}}">
+        <div *ngIf="book?.quantity === 0" class="out-of-stock-overlay">
+            <span class="out-of-stock-text">OUT OF STOCK</span>
+        </div>
     </div>
     <div class="book-card-details">
         <p class="book-card-name">{{ book?.bookName || 'Unknown Title' }}</p>

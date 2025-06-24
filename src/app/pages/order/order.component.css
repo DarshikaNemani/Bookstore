@@ -1,3 +1,7 @@
+.cart-main-container{
+    margin: 0px 415px 110px 177px;
+}
+
 .my-cart-container,
 .order-summary-container {
     border: 1px solid #DCDCDC;
@@ -8,6 +12,7 @@
     padding: 35px 20px;
     color: var(--color-text-primary);
     justify-content: space-between;
+    margin: 17px 0px;
 }
 
 .my-cart-left-container {

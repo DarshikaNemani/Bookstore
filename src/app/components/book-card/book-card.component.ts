@@ -16,7 +16,7 @@ export class BookCardComponent {
 
   onProductClick(): void {
     if (this.book && this.book._id) {
-      this.router.navigate(['/book-details', this.book._id]);
+      this.router.navigate(['/book', this.book._id]);
     }
   }
 }
