@@ -5,7 +5,7 @@ import { LoginPageComponent } from './pages/login/login.component';
 import { WishlistComponent } from './pages/wishlist/wishlist.component';
 import { authGuard } from './guards/auth.guard';
 import { DevComponent } from './pages/dev/dev.component';
-import { BookHeroComponent } from './components/book-hero/book-hero.component';
+import { BookComponent } from './pages/book/book.component';
 import { OrderComponent } from './pages/order/order.component';
 import { OrderSuccessComponent } from './components/order-success/order-success.component';
 import { AddressFormComponent } from './components/address-form/address-form.component';
@@ -14,47 +14,54 @@ import { MyOrdersComponent } from './pages/my-orders/my-orders.component';
 export const routes: Routes = [
   {
     path: 'login',
-    component: LoginPageComponent
+    component: LoginPageComponent,
   },
   {
     path: 'user',
     component: UserProfileComponent,
-    canActivate: [authGuard]
+    canActivate: [authGuard],
   },
   {
     path: 'wishlist',
     component: WishlistComponent,
-    canActivate: [authGuard]
+    canActivate: [authGuard],
   },
   {
     path: 'order',
     component: OrderComponent,
-    canActivate: [authGuard]
+    canActivate: [authGuard],
+    children: [
+      {
+        path: 'success',
+        component: OrderSuccessComponent,
+        canActivate: [authGuard],
+      },
+    ],
   },
   {
-    path: 'order/success',
-    component: OrderSuccessComponent,
-    canActivate: [authGuard]
+    path: 'myorders',
+    component: MyOrdersComponent,
+    canActivate: [authGuard],
   },
   {
     path: 'home',
-    component: HomeComponent
+    component: HomeComponent,
   },
   {
     path: '',
     redirectTo: '/home',
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
   {
-    path: 'book-details/:id',
-    component: BookHeroComponent
+    path: 'book/:id',
+    component: BookComponent,
   },
   {
     path: 'myorders',
-    component: MyOrdersComponent
+    component: MyOrdersComponent,
   },
   {
     path: '**',
-    redirectTo: '/home'
+    redirectTo: '/home',
   },
 ];

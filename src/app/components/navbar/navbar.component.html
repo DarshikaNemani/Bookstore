@@ -1,6 +1,6 @@
 <nav>
     <span class="nav-brand-search-container">
-        <span class="nav-brand-container">
+        <span class="nav-brand-container" routerLink="/home">
             <img alt="logo" src="education.svg">
             <span class="nav-title">Bookstore</span>
         </span>
@@ -17,7 +17,7 @@
                 class="fa-regular fa-user"></i>Profile
                 <!-- <hr *ngIf="isProfileOpen"> -->
         </button>
-        <button class="nav-cart-button"><i class="fa-solid fa-cart-shopping"></i>Cart</button>
+        <button class="nav-cart-button" routerLink="/order"><i class="fa-solid fa-cart-shopping"></i>Cart</button>
     </span>
 </nav>
 
