@@ -6,13 +6,16 @@
         </span>
         <div class="nav-search-container">
             <i class="fas fa-search nav-search-icon"></i>
-            <input type="search" placeholder="Search ..." class="nav-search-input">
+            <input type="search" placeholder="Search ..." class="nav-search-input" 
+                   [disabled]="!isHomePage" 
+                   [value]="searchTerm"
+                   (input)="onSearchChange($event)">
         </div>
     </span>
     <span class="nav-icon-group">
         <button class="nav-profile-button" (click)="toggleProfileDropdown()"><i
                 class="fa-regular fa-user"></i>Profile
-            <!-- <hr *ngIf="isProfileOpen"> -->
+                <!-- <hr *ngIf="isProfileOpen"> -->
         </button>
         <button class="nav-cart-button"><i class="fa-solid fa-cart-shopping"></i>Cart</button>
     </span>
@@ -21,7 +24,6 @@
 <div *ngIf="isProfileOpen" class="profile-dropdown">    
     <p class="profile-dropdown-welcome">Welcome</p>
     <p class="profile-dropdown-content">To access account and manage orders</p>
-
     <button [routerLink]="['/login']" routerLinkActive="router-link-active">LOGIN/SIGNUP</button>
     <hr>
     <div class="profile-dropdown-button"></div>
