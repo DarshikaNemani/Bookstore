@@ -21,18 +21,19 @@
         <div *ngIf="isLoading" class="loading">Loading feedbacks...</div>
 
         <div *ngFor="let feedback of feedbackList" class="feedback-item">
-            <div class="feedback-username-details">
+            <div class="feedback-username-image">
                 <img src="2766594.png" alt="" width="100px">
+            </div>
+            <div class="feedback--details">
                 <p class="feedback-username">{{ feedback.user_id?.fullName || 'Anonymous' }}</p>
+                <div class="user-feedback-stars">
+                    <i *ngFor="let star of getStarsArray(feedback.rating)"
+                        [class]="star ? 'fa-solid fa-star' : 'fa-regular fa-star'" style="color: #ffa500;">
+                    </i>
+                </div>
+                <p class="user-feedback-review">{{ feedback.comment }}</p>
             </div>
-            <div class="user-feedback-stars">
-                <i *ngFor="let star of getStarsArray(feedback.rating)"
-                    [class]="star ? 'fa-solid fa-star' : 'fa-regular fa-star'" style="color: #ffa500;">
-                </i>
-            </div>
-            <p class="user-feedback-review">{{ feedback.comment }}</p>
         </div>
-
         <div *ngIf="feedbackList.length === 0 && !isLoading" class="no-feedback">
             No feedback available for this product.
         </div>
