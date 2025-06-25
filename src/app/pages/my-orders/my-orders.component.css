@@ -2,6 +2,29 @@
     min-height: 83.4vh;
     margin: 17px 0px 0px 177px;
 }
+.breadcrumb {
+    margin-bottom: 20px;
+    font-size: 14px;
+    color: #666;
+}
+
+.breadcrumb-link {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.breadcrumb-link:hover {
+    text-decoration: underline;
+}
+
+.breadcrumb-separator {
+    margin: 0 8px;
+}
+
+.breadcrumb-current {
+    color: #333;
+    font-weight: 500;
+}
 
 .order-summary-container {
     border: 1px solid #DCDCDC;

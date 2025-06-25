@@ -17,7 +17,13 @@
             <span *ngIf="isLoggedIn()">{{ getUserDisplayName().split(' ')[1] }}</span>
             <span *ngIf="!isLoggedIn()">Profile</span>
         </button>
-        <button class="nav-cart-button" routerLink="/order"><i class="fa-solid fa-cart-shopping"></i>Cart</button>
+        <button class="nav-cart-button" routerLink="/order" (click)="updateCartCount()">
+            <div class="cart-icon-container">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span *ngIf="isLoggedIn() && cartItemCount > 0" class="cart-badge">{{ cartItemCount }}</span>
+            </div>
+            Cart
+        </button>
     </span>
 </nav>
 

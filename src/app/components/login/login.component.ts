@@ -1,12 +1,6 @@
-import {
-  Component,
-  ChangeDetectionStrategy,
-  signal,
-  inject,
-} from '@angular/core';
+import { Component, ChangeDetectionStrategy, signal, inject, Input, OnInit } from '@angular/core';
 import {
   FormControl,
-  FormGroup,
   Validators,
   FormsModule,
   ReactiveFormsModule,
@@ -17,9 +11,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-import { ProductService } from '../../services/product.service';
 
 @Component({
   selector: 'app-login',
@@ -32,18 +25,19 @@ import { ProductService } from '../../services/product.service';
     MatCardModule,
     MatSnackBarModule,
     CommonModule,
+    RouterModule,
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
+  @Input() isSignupMode: boolean = false;
+
   private authService = inject(AuthService);
-  private productService = inject(ProductService);
   private router = inject(Router);
   private snackBar = inject(MatSnackBar);
 
-  // Form Controls (keeping original structure)
   emailFormControl = new FormControl('', [
     Validators.required,
     Validators.email,
@@ -61,10 +55,13 @@ export class LoginComponent {
     Validators.pattern(/^[0-9]{10}$/),
   ]);
 
-  // State management
   hide = signal(true);
   isLoginMode: boolean = true;
   isLoading = signal(false);
+
+  ngOnInit(): void {
+    this.isLoginMode = !this.isSignupMode;
+  }
 
   clickEvent(event: MouseEvent) {
     this.hide.set(!this.hide());
@@ -73,37 +70,27 @@ export class LoginComponent {
 
   login() {
     this.isLoginMode = true;
+    this.router.navigate(['/login']);
   }
-
+  
   signup() {
     this.isLoginMode = false;
+    this.router.navigate(['/signup']);
   }
 
-  // Login functionality
   onLogin() {
     if (this.emailFormControl.valid && this.passwordFormControl.valid) {
       this.isLoading.set(true);
-
+      
       const loginData = {
         email: this.emailFormControl.value!,
-        password: this.passwordFormControl.value!,
+        password: this.passwordFormControl.value!
       };
 
       this.authService.login(loginData).subscribe({
         next: (response) => {
           this.isLoading.set(false);
-          console.log('Login response:', response); // Debug log to see response structure
-          
           if (response && (response.token || response.success)) {
-            // If fullName is not in the response, we might need to fetch user profile
-            // For now, let's use the email as a fallback name
-            if (!this.authService.getUserName()) {
-              // Extract first part of email as a fallback name
-              const emailName = this.emailFormControl.value!.split('@')[0];
-              const capitalizedName = emailName.charAt(0).toUpperCase() + emailName.slice(1);
-              this.authService.setUserName(capitalizedName);
-            }
-            
             this.showSuccess('Login successful!');
             this.router.navigate(['/home']);
           } else {
@@ -114,38 +101,32 @@ export class LoginComponent {
           this.isLoading.set(false);
           console.error('Login error:', error);
           this.showError('Login failed. Please try again.');
-        },
+        }
       });
     } else {
       this.showError('Please enter valid email and password');
     }
   }
 
-  // Signup functionality
   onSignup() {
-    if (
-      this.nameFormControl.valid &&
-      this.emailFormControl.valid &&
-      this.passwordFormControl.valid &&
-      this.phoneFormControl.valid
-    ) {
+    if (this.nameFormControl.valid && this.emailFormControl.valid && 
+        this.passwordFormControl.valid && this.phoneFormControl.valid) {
       this.isLoading.set(true);
 
       const signupData = {
         fullName: this.nameFormControl.value!,
         email: this.emailFormControl.value!,
         password: this.passwordFormControl.value!,
-        phone: this.phoneFormControl.value!,
+        phone: this.phoneFormControl.value!
       };
 
       this.authService.signup(signupData).subscribe({
         next: (response) => {
           this.isLoading.set(false);
-          console.log('Signup response:', response); // Debug log
-          
           if (response && (response.success || response.message)) {
             this.showSuccess('Registration successful! Please login.');
-            this.login(); // Switch to login mode
+            this.router.navigate(['/login']);
+            this.resetForms();
           } else {
             this.showError('Registration failed. Please try again.');
           }
@@ -154,7 +135,7 @@ export class LoginComponent {
           this.isLoading.set(false);
           console.error('Signup error:', error);
           this.showError('Registration failed. Please try again.');
-        },
+        }
       });
     } else {
       this.showError('Please fill all fields correctly');
@@ -171,14 +152,14 @@ export class LoginComponent {
   private showSuccess(message: string) {
     this.snackBar.open(message, 'Close', {
       duration: 3000,
-      panelClass: ['success-snackbar'],
+      panelClass: ['success-snackbar']
     });
   }
 
   private showError(message: string) {
     this.snackBar.open(message, 'Close', {
       duration: 5000,
-      panelClass: ['error-snackbar'],
+      panelClass: ['error-snackbar']
     });
   }
 }

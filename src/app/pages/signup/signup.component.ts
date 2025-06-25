@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 import { LoginComponent as LoginFormComponent } from '../../components/login/login.component';
 
 @Component({
-  selector: 'app-login-page',
+  selector: 'app-signup',
   imports: [LoginFormComponent],
-  template: '<app-login></app-login>',
-  styleUrl: './login.component.css'
+  templateUrl: './signup.component.html',
+  styleUrl: './signup.component.css'
 })
-export class LoginPageComponent {
+export class SignupComponent {
+
 }

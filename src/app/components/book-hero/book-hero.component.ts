@@ -26,6 +26,7 @@ export class BookHeroComponent implements OnInit {
   cartQuantity = 0;
   isUpdatingQuantity = false;
   cartItems: any[] = [];
+  cartItemId: string | null = null; // Store the cart item ID for updates and deletion
 
   constructor(
     private route: ActivatedRoute,
@@ -88,7 +89,7 @@ export class BookHeroComponent implements OnInit {
   loadCartItems(): void {
     this.cartService.getCartItems().subscribe({
       next: (response) => {
-        console.log('Cart items loaded:', response); // Debug log
+        console.log('BookHero - Cart items loaded:', response);
         if (response.success && response.result) {
           this.cartItems = response.result;
           this.checkCartStatus();
@@ -113,24 +114,32 @@ export class BookHeroComponent implements OnInit {
       const cartItem = this.cartItems.find(item => 
         item.product_id._id === this.book._id
       );
-      console.log('Checking cart status:', {
+      
+      console.log('BookHero - Checking cart status:', {
         bookId: this.book._id,
         cartItems: this.cartItems,
         foundItem: cartItem
-      }); // Debug log
+      });
       
       if (cartItem) {
         this.isInCart = true;
         this.cartQuantity = cartItem.quantityToBuy;
-        console.log('Item found in cart:', { isInCart: this.isInCart, quantity: this.cartQuantity }); // Debug log
+        this.cartItemId = cartItem._id; // Store cart item ID for API calls
+        console.log('BookHero - Item found in cart:', { 
+          isInCart: this.isInCart, 
+          quantity: this.cartQuantity,
+          cartItemId: this.cartItemId 
+        });
       } else {
         this.isInCart = false;
         this.cartQuantity = 0;
-        console.log('Item not in cart'); // Debug log
+        this.cartItemId = null;
+        console.log('BookHero - Item not in cart');
       }
     } else {
       this.isInCart = false;
       this.cartQuantity = 0;
+      this.cartItemId = null;
     }
   }
 
@@ -146,42 +155,51 @@ export class BookHeroComponent implements OnInit {
       return;
     }
 
-    console.log('Adding to cart:', this.book._id); // Debug log
+    console.log('BookHero - Adding to cart:', this.book._id);
     this.isAddingToCart = true;
     
     this.cartService.addToCart(this.book._id).subscribe({
       next: (response) => {
-        console.log('Add to cart response:', response); // Debug log
+        console.log('BookHero - Add to cart response:', response);
         this.isAddingToCart = false;
         
         if (response.success) {
           // Set local state immediately
           this.isInCart = true;
           this.cartQuantity = 1;
-          console.log('Cart state updated:', { isInCart: this.isInCart, quantity: this.cartQuantity }); // Debug log
-          
-          // Don't reload cart items immediately to avoid state conflicts
-          // The user can see the quantity selector right away
+          // Reload cart items to get the cart item ID
+          this.loadCartItems();
+          console.log('BookHero - Cart state updated:', { isInCart: this.isInCart, quantity: this.cartQuantity });
         } else {
-          console.error('Add to cart failed:', response.message);
+          console.error('BookHero - Add to cart failed:', response.message);
           alert('Failed to add book to cart: ' + response.message);
         }
       },
       error: (error) => {
         this.isAddingToCart = false;
-        console.error('Error adding to cart:', error);
+        console.error('BookHero - Error adding to cart:', error);
         alert('Error adding book to cart. Please try again.');
       }
     });
   }
 
   increaseQuantity(): void {
-    if (!this.book || !this.book._id) {
-      console.error('No book selected');
+    if (!this.book || !this.book._id || !this.cartItemId) {
+      console.error('BookHero - Missing required data:', {
+        hasBook: !!this.book,
+        bookId: this.book?._id,
+        cartItemId: this.cartItemId
+      });
+      alert('Unable to update quantity. Please refresh the page and try again.');
       return;
     }
 
-    // Check if we can increase (don't exceed available stock)
+    // Check if we can increase (max 10 items, don't exceed available stock)
+    if (this.cartQuantity >= 10) {
+      alert('Maximum 10 items allowed per product.');
+      return;
+    }
+
     if (this.cartQuantity >= this.book.quantity) {
       alert('Cannot add more items. Stock limit reached.');
       return;
@@ -190,32 +208,44 @@ export class BookHeroComponent implements OnInit {
     this.isUpdatingQuantity = true;
     const newQuantity = this.cartQuantity + 1;
 
-    console.log('Updating quantity to:', newQuantity); // Debug log
+    console.log('BookHero - Increasing quantity:', {
+      cartItemId: this.cartItemId,
+      bookName: this.book.bookName,
+      currentQuantity: this.cartQuantity,
+      newQuantity: newQuantity
+    });
     
-    this.cartService.updateCartQuantity(this.book._id, newQuantity).subscribe({
+    // Use cart item ID instead of product ID
+    this.cartService.updateCartQuantity(this.cartItemId, newQuantity).subscribe({
       next: (response) => {
-        console.log('Update quantity response:', response); // Debug log
+        console.log('BookHero - Increase quantity response:', response);
         this.isUpdatingQuantity = false;
         
         if (response.success) {
+          console.log('BookHero - Successfully increased quantity to:', newQuantity);
           this.cartQuantity = newQuantity;
-          console.log('Quantity updated to:', this.cartQuantity); // Debug log
+          
+          // Reload cart items to verify the update
+          setTimeout(() => {
+            this.loadCartItems();
+          }, 500);
         } else {
-          console.error('Update quantity failed:', response.message);
+          console.error('BookHero - Update quantity failed:', response.message);
           alert('Failed to update quantity: ' + response.message);
         }
       },
       error: (error) => {
         this.isUpdatingQuantity = false;
-        console.error('Error updating quantity:', error);
+        console.error('BookHero - Error updating quantity:', error);
         alert('Error updating quantity. Please try again.');
       }
     });
   }
 
   decreaseQuantity(): void {
-    if (!this.book || !this.book._id) {
-      console.error('No book selected');
+    if (!this.book || !this.book._id || !this.cartItemId) {
+      console.error('BookHero - Missing required data for decrease');
+      alert('Unable to update quantity. Please refresh the page and try again.');
       return;
     }
 
@@ -228,56 +258,70 @@ export class BookHeroComponent implements OnInit {
     this.isUpdatingQuantity = true;
     const newQuantity = this.cartQuantity - 1;
 
-    console.log('Decreasing quantity to:', newQuantity); // Debug log
+    console.log('BookHero - Decreasing quantity:', {
+      cartItemId: this.cartItemId,
+      bookName: this.book.bookName,
+      currentQuantity: this.cartQuantity,
+      newQuantity: newQuantity
+    });
     
-    this.cartService.updateCartQuantity(this.book._id, newQuantity).subscribe({
+    // Use cart item ID instead of product ID
+    this.cartService.updateCartQuantity(this.cartItemId, newQuantity).subscribe({
       next: (response) => {
-        console.log('Decrease quantity response:', response); // Debug log
+        console.log('BookHero - Decrease quantity response:', response);
         this.isUpdatingQuantity = false;
         
         if (response.success) {
+          console.log('BookHero - Successfully decreased quantity to:', newQuantity);
           this.cartQuantity = newQuantity;
-          console.log('Quantity decreased to:', this.cartQuantity); // Debug log
+          
+          // Reload cart items to verify the update
+          setTimeout(() => {
+            this.loadCartItems();
+          }, 500);
         } else {
-          console.error('Decrease quantity failed:', response.message);
+          console.error('BookHero - Decrease quantity failed:', response.message);
           alert('Failed to update quantity: ' + response.message);
         }
       },
       error: (error) => {
         this.isUpdatingQuantity = false;
-        console.error('Error updating quantity:', error);
+        console.error('BookHero - Error updating quantity:', error);
         alert('Error updating quantity. Please try again.');
       }
     });
   }
 
   removeFromCart(): void {
-    if (!this.book || !this.book._id) {
-      console.error('No book selected');
+    if (!this.cartItemId) {
+      console.error('BookHero - No cart item ID available for deletion');
+      alert('Unable to remove item. Please refresh the page and try again.');
       return;
     }
 
     this.isUpdatingQuantity = true;
     
-    console.log('Removing from cart:', this.book._id); // Debug log
+    console.log('BookHero - Removing from cart using cart item ID:', this.cartItemId);
     
-    this.cartService.removeFromCart(this.book._id).subscribe({
+    // Use the cart item ID for deletion
+    this.cartService.removeFromCart(this.cartItemId).subscribe({
       next: (response) => {
-        console.log('Remove from cart response:', response); // Debug log
+        console.log('BookHero - Remove from cart response:', response);
         this.isUpdatingQuantity = false;
         
         if (response.success) {
           this.isInCart = false;
           this.cartQuantity = 0;
-          console.log('Item removed from cart'); // Debug log
+          this.cartItemId = null;
+          console.log('BookHero - Item removed from cart');
         } else {
-          console.error('Remove from cart failed:', response.message);
+          console.error('BookHero - Remove from cart failed:', response.message);
           alert('Failed to remove from cart: ' + response.message);
         }
       },
       error: (error) => {
         this.isUpdatingQuantity = false;
-        console.error('Error removing from cart:', error);
+        console.error('BookHero - Error removing from cart:', error);
         alert('Error removing from cart. Please try again.');
       }
     });

@@ -1,3 +1,26 @@
 .singe-book-container{
     margin: 32px 0px 87px 174px;
 }
+.breadcrumb {
+    margin-bottom: 20px;
+    font-size: 14px;
+    color: var(--color-text-content);
+}
+
+.breadcrumb-link {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.breadcrumb-link:hover {
+    text-decoration: underline;
+}
+
+.breadcrumb-separator {
+    margin: 0 8px;
+}
+
+.breadcrumb-current {
+    color: var(--color-text-primary);
+    font-weight: 500;
+}

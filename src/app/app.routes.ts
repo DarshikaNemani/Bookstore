@@ -1,7 +1,9 @@
+// src/app/app.routes.ts
 import { Routes } from '@angular/router';
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginPageComponent } from './pages/login/login.component';
+import { SignupComponent } from './pages/signup/signup.component';
 import { WishlistComponent } from './pages/wishlist/wishlist.component';
 import { authGuard } from './guards/auth.guard';
 import { DevComponent } from './pages/dev/dev.component';
@@ -18,6 +20,10 @@ export const routes: Routes = [
     component: LoginPageComponent,
   },
   {
+    path: 'signup',
+    component: SignupComponent,
+  },
+  {
     path: 'user',
     component: UserProfileComponent,
     canActivate: [authGuard],
@@ -31,13 +37,11 @@ export const routes: Routes = [
     path: 'order',
     component: OrderComponent,
     canActivate: [authGuard],
-    children: [
-      {
-        path: 'success',
-        component: OrderSuccessComponent,
-        canActivate: [authGuard],
-      },
-    ],
+  },
+  {
+    path: 'order/success',
+    component: OrderSuccessComponent,
+    canActivate: [authGuard],
   },
   {
     path: 'myorders',
@@ -58,12 +62,8 @@ export const routes: Routes = [
     component: BookComponent,
   },
   {
-    path: 'myorders',
-    component: MyOrdersComponent,
-  },
-  {
-    path:'forgetpassword',
-    component: ForgotPasswordComponent
+    path: 'forgetpassword',
+    component: ForgotPasswordComponent,
   },
   {
     path: '**',

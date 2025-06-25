@@ -47,6 +47,14 @@
         width: 512px;
     }
 
+    textarea{
+        min-height: 82px;
+        padding: 11px 10px;
+        margin-bottom: 16px;
+        max-width: 512px;
+        min-width: 512px;
+    }
+
     .address-form-user-details,
     .address-form-city-state {
         display: flex;
