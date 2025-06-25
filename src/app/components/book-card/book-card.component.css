@@ -10,11 +10,9 @@
     height: 172px;
     background-color: #F5F5F5;
     position: relative;
-
-    img {
-        display: block;
-        margin: auto;
-    }
+    display: flex;
+    justify-content: center;
+    align-items: center;    
 }
 
 .out-of-stock-overlay {

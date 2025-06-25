@@ -17,55 +17,74 @@ export class AuthService {
     password: string;
     phone: string;
   }): Observable<any> {
-    return this.http.post(`${this.baseUrl}/bookstore_user/registration`, payload).pipe(
-      tap(response => {
-        // Store fullName during signup if response is successful
-        const typedResponse = response as { success?: boolean; result?: any };
-        if (typedResponse && typedResponse.success) {
-          this.setUserName(payload.fullName);
-        }
-      })
-    );
+    return this.http
+      .post(`${this.baseUrl}/bookstore_user/registration`, payload)
+      .pipe(
+        tap((response) => {
+          const typedResponse = response as { success?: boolean; result?: any };
+          if (typedResponse && typedResponse.success) {
+            this.setUserName(payload.fullName);
+          }
+        })
+      );
   }
 
   login(payload: { email: string; password: string }): Observable<any> {
     return this.http.post(`${this.baseUrl}/bookstore_user/login`, payload).pipe(
-      tap(response => {
-        // Type assertion to inform TypeScript about the structure
-        const typedResponse = response as { 
-          result?: { 
+      tap((response) => {
+        const typedResponse = response as {
+          result?: {
             accessToken: string;
-            fullName?: string;
           };
           success?: boolean;
         };
-        if (typedResponse && typedResponse.result && typedResponse.result.accessToken) {
+
+        // Login API only returns accessToken, no fullName
+        if (
+          typedResponse &&
+          typedResponse.result &&
+          typedResponse.result.accessToken
+        ) {
           this.setToken(typedResponse.result.accessToken);
-          
-          // Store fullName if available in response
-          if (typedResponse.result.fullName) {
-            this.setUserName(typedResponse.result.fullName);
-          }
         }
       })
     );
   }
 
   authToken(token: string): Observable<any> {
-    return this.http.post(`${this.baseUrl}/bookstore_user/verification/${token}`, { token });
+    return this.http.post(
+      `${this.baseUrl}/bookstore_user/verification/${token}`,
+      { token }
+    );
   }
 
-  // Get user profile
+  // Get user profile - this will provide the fullName
   getUserProfile(): Observable<any> {
     const headers = this.getAuthHeaders();
-    return this.http.get(`${this.baseUrl}/bookstore_user/get_user_details`, { headers }).pipe(
-      tap(response => {
-        const typedResponse = response as { success?: boolean; result?: { fullName?: string } };
-        if (typedResponse && typedResponse.success && typedResponse.result?.fullName) {
-          this.setUserName(typedResponse.result.fullName);
-        }
-      })
-    );
+    return this.http
+      .get(`${this.baseUrl}/bookstore_user/get_user_details`, { headers })
+      .pipe(
+        tap((response) => {
+          const typedResponse = response as {
+            success?: boolean;
+            result?: {
+              fullName?: string;
+              user?: { fullName?: string };
+            };
+          };
+
+          if (typedResponse && typedResponse.success && typedResponse.result) {
+            // Try different possible paths for fullName in profile response
+            const fullName =
+              typedResponse.result.fullName ||
+              typedResponse.result.user?.fullName;
+
+            if (fullName) {
+              this.setUserName(fullName);
+            }
+          }
+        })
+      );
   }
 
   private getAuthHeaders() {
@@ -111,6 +130,6 @@ export class AuthService {
   // Logout method
   logout(): void {
     this.removeToken();
-    this.removeUserName(); // Also remove username on logout
+    this.removeUserName();
   }
 }

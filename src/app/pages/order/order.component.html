@@ -1,13 +1,17 @@
+<!-- src/app/pages/order/order.component.html -->
 <app-navbar />
 <div class="cart-main-container">
-    <div class="my-cart-container">
+    <div class="breadcrumb">
+        <span routerLink="/home" class="breadcrumb-link">Home</span>
+        <span class="breadcrumb-separator">/</span>
+        <span class="breadcrumb-current">My cart</span>
+    </div>
+
+    <!-- Step 1: Cart Items -->
+    <div class="my-cart-container" *ngIf="currentStep >= 1">
         <div class="my-cart-left-container">
             <div class="my-cart-title">
                 <p class="my-cart-title">My cart ({{cartItems.length}})</p>
-                <!-- Debug refresh button - remove this after testing -->
-                <button (click)="refreshCart()" style="margin-left: 10px; padding: 5px 10px; font-size: 12px;">
-                    Refresh Cart
-                </button>
             </div>
 
             <div *ngIf="isLoading" class="loading-container">
@@ -19,11 +23,6 @@
             </div>
 
             <div class="my-cart-main" *ngFor="let cartItem of cartItems; let i = index">
-                <!-- Debug info for each item -->
-                <div style="font-size: 10px; color: blue; margin-bottom: 5px;">
-                    Debug: Cart Item Quantity = {{cartItem.quantityToBuy}}
-                </div>
-
                 <div class="my-cart-image">
                     <img [src]="cartItem.product_id.bookImage || 'Image 7.png'" alt="Book Image">
                 </div>
@@ -51,31 +50,33 @@
                                 [disabled]="isItemBeingUpdated(i) || cartItem.quantityToBuy >= 10 || cartItem.quantityToBuy >= cartItem.product_id.quantity">
                                 {{ isItemBeingUpdated(i) ? '...' : '+' }}
                             </button>
-                        </div>
-                        <div class="my-cart-book-remove">
-                            <a href="javascript:void(0)" (click)="removeItem(i)"
-                                [class.removing]="isItemBeingRemoved(i)"
-                                [style.pointer-events]="isItemBeingRemoved(i) ? 'none' : 'auto'"
-                                [style.opacity]="isItemBeingRemoved(i) ? '0.6' : '1'"
-                                [style.cursor]="isItemBeingRemoved(i) ? 'not-allowed' : 'pointer'">
-                                {{ isItemBeingRemoved(i) ? 'Removing...' : 'Remove' }}
-                            </a>
+                            <div class="my-cart-book-remove">
+                                <a href="javascript:void(0)" (click)="removeItem(i)"
+                                    [class.removing]="isItemBeingRemoved(i)"
+                                    [style.pointer-events]="isItemBeingRemoved(i) ? 'none' : 'auto'"
+                                    [style.opacity]="isItemBeingRemoved(i) ? '0.6' : '1'"
+                                    [style.cursor]="isItemBeingRemoved(i) ? 'not-allowed' : 'pointer'">
+                                    {{ isItemBeingRemoved(i) ? 'Removing...' : 'Remove' }}
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="my-cart-right-container">
-            <div class="my-cart-location">Location ka kuch toh weird sa dabba</div>
-            <button class="blue-button" (click)="placeOrder()" [disabled]="isLoading || cartItems.length === 0">
-                {{isLoading ? 'PLACING ORDER...' : 'PLACE ORDER'}}
+            <div class="my-cart-location">Use current location</div>
+            <button class="blue-button" (click)="proceedToAddress()" [disabled]="isLoading || cartItems.length === 0">
+                {{isLoading ? 'LOADING...' : 'PLACE ORDER'}}
             </button>
         </div>
     </div>
 
-    <app-address-form />
+    <!-- Step 2: Address Form -->
+    <app-address-form *ngIf="currentStep >= 2" (addressCompleted)="onAddressCompleted()"></app-address-form>
 
-    <div class="order-summary-container" *ngIf="cartItems.length > 0">
+    <!-- Step 3: Order Summary -->
+    <div class="order-summary-container" *ngIf="currentStep >= 3 && cartItems.length > 0">
         <div class="my-cart-left-container">
             <div class="my-cart-title">
                 <p class="my-cart-title">Order Summary</p>
@@ -103,7 +104,7 @@
         </div>
         <div class="my-cart-right-container">
             <button class="blue-button" (click)="placeOrder()" [disabled]="isLoading || cartItems.length === 0">
-                {{isLoading ? 'PLACING ORDER...' : 'PLACE ORDER'}}
+                {{isLoading ? 'PLACING ORDER...' : 'CHECKOUT'}}
             </button>
         </div>
     </div>

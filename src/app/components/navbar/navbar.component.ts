@@ -1,4 +1,10 @@
-import { Component, EventEmitter, Output, OnInit, OnDestroy } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Output,
+  OnInit,
+  OnDestroy,
+} from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -10,7 +16,13 @@ import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
-  imports: [RouterModule, MatFormFieldModule, MatInputModule, MatIconModule, CommonModule],
+  imports: [
+    RouterModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
+    CommonModule,
+  ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css',
 })
@@ -23,25 +35,42 @@ export class NavbarComponent implements OnInit, OnDestroy {
   private cartUpdateSubscription?: Subscription;
 
   constructor(
-    private router: Router, 
+    private router: Router,
     private authService: AuthService,
     private cartService: CartService
   ) {
-    this.router.events.subscribe(event => {
+    this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        this.isHomePage = event.urlAfterRedirects === '/' || event.urlAfterRedirects === '/home';
+        this.isHomePage =
+          event.urlAfterRedirects === '/' ||
+          event.urlAfterRedirects === '/home';
+        // Close profile dropdown when navigating to a new page
+        this.isProfileOpen = false;
       }
     });
   }
 
   ngOnInit(): void {
     this.updateCartCount();
-    // Subscribe to cart updates instead of using interval
-    this.cartUpdateSubscription = this.cartService.cartUpdated$.subscribe(() => {
-      if (this.isLoggedIn()) {
-        this.updateCartCount();
+    this.cartUpdateSubscription = this.cartService.cartUpdated$.subscribe(
+      () => {
+        if (this.isLoggedIn()) {
+          this.updateCartCount();
+        }
       }
-    });
+    );
+
+    // Load user profile if user is already logged in (e.g., page refresh)
+    if (this.isLoggedIn() && !this.authService.getUserName()) {
+      this.authService.getUserProfile().subscribe({
+        next: (response) => {
+          console.log('User profile loaded on navbar init:', response);
+        },
+        error: (error) => {
+          console.error('Error loading user profile on navbar init:', error);
+        },
+      });
+    }
   }
 
   ngOnDestroy(): void {
@@ -63,16 +92,19 @@ export class NavbarComponent implements OnInit, OnDestroy {
         error: (error) => {
           console.error('Error fetching cart items:', error);
           this.cartItemCount = 0;
-        }
+        },
       });
     } else {
       this.cartItemCount = 0;
     }
   }
 
-  // ... rest of the existing methods remain the same ...
   toggleProfileDropdown() {
     this.isProfileOpen = !this.isProfileOpen;
+  }
+
+  closeProfileDropdown() {
+    this.isProfileOpen = false;
   }
 
   onSearchChange(event: Event) {

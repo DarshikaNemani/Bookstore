@@ -1,4 +1,11 @@
-import { Component, ChangeDetectionStrategy, signal, inject, Input, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  signal,
+  inject,
+  Input,
+  OnInit,
+} from '@angular/core';
 import {
   FormControl,
   Validators,
@@ -72,7 +79,7 @@ export class LoginComponent implements OnInit {
     this.isLoginMode = true;
     this.router.navigate(['/login']);
   }
-  
+
   signup() {
     this.isLoginMode = false;
     this.router.navigate(['/signup']);
@@ -81,27 +88,47 @@ export class LoginComponent implements OnInit {
   onLogin() {
     if (this.emailFormControl.valid && this.passwordFormControl.valid) {
       this.isLoading.set(true);
-      
+
       const loginData = {
         email: this.emailFormControl.value!,
-        password: this.passwordFormControl.value!
+        password: this.passwordFormControl.value!,
       };
 
       this.authService.login(loginData).subscribe({
         next: (response) => {
-          this.isLoading.set(false);
-          if (response && (response.token || response.success)) {
+          if (response && response.success) {
             this.showSuccess('Login successful!');
-            this.router.navigate(['/home']);
+
+            // Since login API doesn't return fullName, always fetch user profile
+            this.authService.getUserProfile().subscribe({
+              next: (profileResponse) => {
+                this.isLoading.set(false);
+                this.router.navigate(['/home']);
+              },
+              error: (profileError) => {
+                console.error('Error fetching user profile:', profileError);
+                this.isLoading.set(false);
+                // Still navigate to home even if profile fetch fails
+                this.router.navigate(['/home']);
+              },
+            });
           } else {
+            this.isLoading.set(false);
             this.showError('Login failed. Please check your credentials.');
           }
         },
         error: (error) => {
           this.isLoading.set(false);
           console.error('Login error:', error);
-          this.showError('Login failed. Please try again.');
-        }
+
+          if (error.status === 401) {
+            this.showError('Invalid email or password.');
+          } else if (error.status === 404) {
+            this.showError('User not found. Please check your email.');
+          } else {
+            this.showError('Login failed. Please try again.');
+          }
+        },
       });
     } else {
       this.showError('Please enter valid email and password');
@@ -109,21 +136,26 @@ export class LoginComponent implements OnInit {
   }
 
   onSignup() {
-    if (this.nameFormControl.valid && this.emailFormControl.valid && 
-        this.passwordFormControl.valid && this.phoneFormControl.valid) {
+    if (
+      this.nameFormControl.valid &&
+      this.emailFormControl.valid &&
+      this.passwordFormControl.valid &&
+      this.phoneFormControl.valid
+    ) {
       this.isLoading.set(true);
 
       const signupData = {
         fullName: this.nameFormControl.value!,
         email: this.emailFormControl.value!,
         password: this.passwordFormControl.value!,
-        phone: this.phoneFormControl.value!
+        phone: this.phoneFormControl.value!,
       };
 
       this.authService.signup(signupData).subscribe({
         next: (response) => {
           this.isLoading.set(false);
-          if (response && (response.success || response.message)) {
+
+          if (response && response.success) {
             this.showSuccess('Registration successful! Please login.');
             this.router.navigate(['/login']);
             this.resetForms();
@@ -135,7 +167,7 @@ export class LoginComponent implements OnInit {
           this.isLoading.set(false);
           console.error('Signup error:', error);
           this.showError('Registration failed. Please try again.');
-        }
+        },
       });
     } else {
       this.showError('Please fill all fields correctly');
@@ -152,14 +184,14 @@ export class LoginComponent implements OnInit {
   private showSuccess(message: string) {
     this.snackBar.open(message, 'Close', {
       duration: 3000,
-      panelClass: ['success-snackbar']
+      panelClass: ['success-snackbar'],
     });
   }
 
   private showError(message: string) {
     this.snackBar.open(message, 'Close', {
       duration: 5000,
-      panelClass: ['error-snackbar']
+      panelClass: ['error-snackbar'],
     });
   }
 }

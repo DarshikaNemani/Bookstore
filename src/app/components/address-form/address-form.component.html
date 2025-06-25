@@ -1,3 +1,4 @@
+<!-- src/app/components/address-form/address-form.component.html -->
 <div class="address-form-container">
     <div class="address-form-title-main">
         <p class="address-form-title">Customer Details</p>
@@ -25,7 +26,7 @@
             <div class="address-form-city-state">
                 <div class="address-form-city label-input">
                     <label for="city">City/ Town</label>
-                    <input type="text" id="address" matInput [formControl]="nameFormControl" placeholder="Bengaluru"
+                    <input type="text" id="city" matInput [formControl]="nameFormControl" placeholder="Bengaluru"
                         required>
                 </div>
                 <div class="address-form-state label-input">
@@ -45,6 +46,6 @@
         </mat-radio-group>
     </div>
     <div class="button-row">
-        <button class="blue-button">Continue</button>
+        <button class="blue-button" (click)="onContinue()">Continue</button>
     </div>
 </div>

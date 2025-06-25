@@ -1,4 +1,5 @@
-import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
+// src/app/components/address-form/address-form.component.ts
+import { Component, ChangeDetectionStrategy, signal, Output, EventEmitter } from '@angular/core';
 import {
   FormControl,
   Validators,
@@ -30,6 +31,8 @@ import { MatRadioModule } from '@angular/material/radio';
   styleUrl: './address-form.component.css',
 })
 export class AddressFormComponent {
+  @Output() addressCompleted = new EventEmitter<void>();
+
   emailFormControl = new FormControl('', [
     Validators.required,
     Validators.email,
@@ -38,8 +41,16 @@ export class AddressFormComponent {
     Validators.required,
     Validators.maxLength(50),
   ]);
-    phoneFormControl = new FormControl('', [
+  phoneFormControl = new FormControl('', [
     Validators.required,
     Validators.pattern(/^[0-9]{10}$/),
   ]);
+
+  onContinue(): void {
+    if (this.nameFormControl.valid && this.phoneFormControl.valid) {
+      this.addressCompleted.emit();
+    } else {
+      alert('Please fill all required fields correctly');
+    }
+  }
 }

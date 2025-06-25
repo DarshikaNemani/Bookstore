@@ -14,11 +14,6 @@
         </div>
         <div class="main-image-button-row">
 
-          <!-- Debug info (remove after testing) -->
-          <div style="font-size: 10px; color: red; margin-bottom: 5px;">
-            Debug: isInCart={{ isInCart }}, cartQuantity={{ cartQuantity }}, isAddingToCart={{ isAddingToCart }}
-          </div>
-
           <!-- Show Add to Bag button if not in cart -->
           <button *ngIf="!isInCart" class="red-button" (click)="addToBag()"
             [disabled]="isAddingToCart || book?.quantity === 0">
