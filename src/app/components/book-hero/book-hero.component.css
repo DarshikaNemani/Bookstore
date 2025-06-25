@@ -19,7 +19,7 @@
         max-height: 44px;
       }
     }
-    
+
     .main-image {
       border: 1px solid #d1d1d1;
       border-radius: 2px;
@@ -34,6 +34,7 @@
     display: flex;
     justify-content: space-between;
     font-size: 15px;
+    gap: 10px;
 
     button {
       align-items: center;
@@ -45,10 +46,86 @@
       color: #fff;
       border: none;
       background-color: #333;
+      transition: all 0.3s ease;
 
       i {
         margin-right: 15.5px;
+        transition: color 0.3s ease;
       }
+
+      &:hover {
+        background-color: #444;
+      }
+
+      &:disabled {
+        background-color: #666;
+        cursor: not-allowed;
+      }
+    }
+
+    .wishlist-button.wishlist-active {
+      i {
+        color: var(--color-maroon);
+      }
+    }
+
+    /* Quantity Selector Styles */
+    .quantity-selector {
+      display: flex;
+      align-items: center;
+      width: 170px;
+      height: 40px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      background-color: white;
+      overflow: hidden;
+    }
+
+    .quantity-btn {
+      width: 45px;
+      height: 38px;
+      border: none;
+      background-color: #f8f9fa;
+      color: #666;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      font-size: 14px;
+    }
+
+    .quantity-btn:hover:not(:disabled) {
+      background-color: #e9ecef;
+      color: #333;
+    }
+
+    .quantity-btn:disabled {
+      background-color: #f8f9fa;
+      color: #ccc;
+      cursor: not-allowed;
+    }
+
+    .decrease-btn {
+      border-right: 1px solid #ddd;
+    }
+
+    .increase-btn {
+      border-left: 1px solid #ddd;
+    }
+
+    .quantity-display {
+      flex: 1;
+      text-align: center;
+      font-size: 16px;
+      font-weight: 500;
+      color: #333;
+      background-color: white;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 0;
     }
   }
 
@@ -130,6 +207,19 @@
       border-top: 2px solid #9d9d9d;
       border-bottom: 2px solid #9d9d9d;
       padding: 33.5px 0px;
+    }
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .main-image-button-row {
+    flex-direction: column;
+    gap: 10px;
+
+    button,
+    .quantity-selector {
+      width: 100% !important;
     }
   }
 }

@@ -1,30 +1,43 @@
-<app-navbar/>
+<app-navbar />
 <div class="cart-main-container">
     <div class="my-cart-container">
         <div class="my-cart-left-container">
             <div class="my-cart-title">
-                <p class="my-cart-title">My cart ({{orderItems.length}})</p>
+                <p class="my-cart-title">My cart ({{cartItems.length}})</p>
             </div>
-            <div class="my-cart-main" *ngFor="let item of orderItems; let i = index">
+
+            <div *ngIf="isLoading" class="loading-container">
+                <p>Loading cart items...</p>
+            </div>
+
+            <div *ngIf="!isLoading && cartItems.length === 0" class="empty-cart">
+                <p>Your cart is empty</p>
+            </div>
+
+            <div class="my-cart-main" *ngFor="let cartItem of cartItems; let i = index">
                 <div class="my-cart-image">
-                    <img src="Image 7.png" alt="Book Image">
+                    <img [src]="cartItem.product_id.bookImage || 'Image 7.png'" alt="Book Image">
                 </div>
                 <div class="my-cart-details">
-                    <p class="my-cart-book-name">{{item.product_name}}</p>
-                    <p class="my-cart-book-author">by Steve Krug</p>
+                    <p class="my-cart-book-name">{{cartItem.product_id.bookName}}</p>
+                    <p class="my-cart-book-author">by {{cartItem.product_id.author}}</p>
                     <div class="my-cart-price-container">
-                        <span class="my-cart-book-discount">Rs {{item.product_price}} </span>
-                        <span class="my-cart-book-price">
-                            <del>Rs 2000</del>
+                        <span class="my-cart-book-discount">Rs {{cartItem.product_id.discountPrice ||
+                            cartItem.product_id.price}} </span>
+                        <span class="my-cart-book-price"
+                            *ngIf="cartItem.product_id.discountPrice !== cartItem.product_id.price && cartItem.product_id.discountPrice !== 0">
+                            <del>Rs {{cartItem.product_id.price}}</del>
                         </span>
                     </div>
                     <div class="my-cart-book-quantity">
                         <div class="my-cart-book-quantity-change">
-                            <button class="my-cart-book-decrease" 
-                                    (click)="updateQuantity(i, item.product_quantity - 1)">-</button>
-                            <input type="number" [value]="item.product_quantity" readonly>
-                            <button class="my-cart-book-increase" 
-                                    (click)="updateQuantity(i, item.product_quantity + 1)">+</button>
+                            <button class="my-cart-book-decrease"
+                                (click)="updateQuantity(i, cartItem.quantityToBuy - 1)"
+                                [disabled]="cartItem.quantityToBuy <= 1">-</button>
+                            <input type="number" id="quantity" [value]="cartItem.quantityToBuy" readonly>
+                            <button class="my-cart-book-increase"
+                                (click)="updateQuantity(i, cartItem.quantityToBuy + 1)"
+                                [disabled]="cartItem.quantityToBuy >= cartItem.product_id.quantity">+</button>
                             <div class="my-cart-book-quantity-change">
                                 <a href="javascript:void(0)" (click)="removeItem(i)">Remove</a>
                             </div>
@@ -35,44 +48,45 @@
         </div>
         <div class="my-cart-right-container">
             <div class="my-cart-location">Location ka kuch toh weird sa dabba</div>
-            <button class="blue-button" 
-                    (click)="placeOrder()" 
-                    [disabled]="isLoading || orderItems.length === 0">
+            <button class="blue-button" (click)="placeOrder()" [disabled]="isLoading || cartItems.length === 0">
                 {{isLoading ? 'PLACING ORDER...' : 'PLACE ORDER'}}
             </button>
         </div>
     </div>
 
-    <app-address-form/>
+    <app-address-form />
 
-    <div class="order-summary-container">
+    <div class="order-summary-container" *ngIf="cartItems.length > 0">
         <div class="my-cart-left-container">
             <div class="my-cart-title">
                 <p class="my-cart-title">Order Summary</p>
             </div>
-            <div class="my-cart-main" *ngFor="let item of orderItems">
+            <div class="my-cart-main" *ngFor="let cartItem of cartItems">
                 <div class="my-cart-image">
-                    <img src="Image 7.png" alt="Book Image">
+                    <img [src]="cartItem.product_id.bookImage || 'Image 7.png'" alt="Book Image">
                 </div>
                 <div class="my-cart-details">
-                    <p class="my-cart-book-name">{{item.product_name}}</p>
-                    <p class="my-cart-book-author">by Steve Krug</p>
+                    <p class="my-cart-book-name">{{cartItem.product_id.bookName}}</p>
+                    <p class="my-cart-book-author">by {{cartItem.product_id.author}}</p>
                     <div class="my-cart-price-container">
-                        <span class="my-cart-book-discount">Rs {{item.product_price}} x {{item.product_quantity}} = Rs {{item.product_price * item.product_quantity}}</span>
+                        <span class="my-cart-book-discount">
+                            Rs {{cartItem.product_id.discountPrice || cartItem.product_id.price}} x
+                            {{cartItem.quantityToBuy}} =
+                            Rs {{(cartItem.product_id.discountPrice || cartItem.product_id.price) *
+                            cartItem.quantityToBuy}}
+                        </span>
                     </div>
                 </div>
             </div>
-            <div class="total-price" *ngIf="orderItems.length > 0">
+            <div class="total-price">
                 <h3>Total: Rs {{getTotalPrice()}}</h3>
             </div>
         </div>
         <div class="my-cart-right-container">
-            <button class="blue-button" 
-                    (click)="placeOrder()" 
-                    [disabled]="isLoading || orderItems.length === 0">
+            <button class="blue-button" (click)="placeOrder()" [disabled]="isLoading || cartItems.length === 0">
                 {{isLoading ? 'PLACING ORDER...' : 'PLACE ORDER'}}
             </button>
         </div>
     </div>
 </div>
-<app-footer/>
+<app-footer />

@@ -10,6 +10,7 @@ import { OrderComponent } from './pages/order/order.component';
 import { OrderSuccessComponent } from './components/order-success/order-success.component';
 import { AddressFormComponent } from './components/address-form/address-form.component';
 import { MyOrdersComponent } from './pages/my-orders/my-orders.component';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 
 export const routes: Routes = [
   {
@@ -59,6 +60,10 @@ export const routes: Routes = [
   {
     path: 'myorders',
     component: MyOrdersComponent,
+  },
+  {
+    path:'forgetpassword',
+    component: ForgotPasswordComponent
   },
   {
     path: '**',

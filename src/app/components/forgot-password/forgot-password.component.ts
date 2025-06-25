@@ -1,16 +1,21 @@
 import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
 import { FormControl, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
-import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
-import { FooterComponent } from "../footer/footer.component";
+import { RouterModule } from '@angular/router';
 import { NavbarComponent } from "../navbar/navbar.component";
+import { FooterComponent } from "../footer/footer.component";
 
 @Component({
   selector: 'app-forgot-password',
-  imports: [FormsModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatIconModule, MatCardModule, CommonModule, FooterComponent, NavbarComponent],
+  standalone: true,
+  imports: [
+    FormsModule,
+    ReactiveFormsModule,
+    CommonModule,
+    RouterModule,
+    NavbarComponent,
+    FooterComponent
+],
   templateUrl: './forgot-password.component.html',
   styleUrl: './forgot-password.component.css'
 })

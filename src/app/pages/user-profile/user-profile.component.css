@@ -1,5 +1,5 @@
 .profile-container {
-  max-width: 512px;
+  max-width: 611px;
   margin: 20px 214px;
   padding: 0 20px;
 }
@@ -26,7 +26,6 @@
 
 .profile-section {
   margin-bottom: 30px;
-  border: 1px solid #e0e0e0;
   border-radius: 8px;
 }
 
@@ -39,7 +38,8 @@
   color: var(--color-text-primary);
 }
 
-.edit-button, .add-address-button {
+.edit-button,
+.add-address-button {
   color: var(--color-maroon) !important;
   font-weight: 500;
 }
@@ -54,6 +54,8 @@
 
 .form-field {
   width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .form-field.full-width {
@@ -67,7 +69,6 @@
 }
 
 .address-item {
-  border: 1px solid #e0e0e0;
   border-radius: 8px;
   padding: 20px;
   margin-bottom: 20px;
@@ -108,9 +109,12 @@
 }
 
 .address-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
   gap: 20px;
+
+  input {
+    max-width: 251px;
+  }
 }
 
 .address-type {
@@ -144,28 +148,50 @@
   font-weight: 500;
 }
 
+mat-error {
+  color: var(--color-maroon);
+  font-size: 10px;
+}
+
+mat-labe, label {
+  font-size: 10px;
+  color: var(--color-text-primary);
+  display: flex;
+  justify-content: start;
+  margin-top: 10px;
+}
+
+input {
+  width: 511px;
+  height: 45px;
+  margin: 0px;
+  border: 1px solid #E2E2E2;
+  border-radius: 2px;
+  padding: 11px 10px;
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
   .profile-container {
     padding: 0 15px;
   }
-  
+
   .personal-details-form {
     grid-template-columns: 1fr;
     gap: 15px;
   }
-  
+
   .address-row {
     grid-template-columns: 1fr;
     gap: 15px;
   }
-  
+
   .section-title {
     flex-direction: column;
     align-items: flex-start;
     gap: 10px;
   }
-  
+
   .address-type mat-radio-group {
     flex-direction: column;
     gap: 10px;
@@ -177,7 +203,7 @@
   .mat-mdc-text-field-wrapper {
     background-color: #f5f5f5;
   }
-  
+
   .mat-mdc-form-field-focus-overlay {
     background-color: transparent;
   }
@@ -197,4 +223,4 @@
 
 .mat-mdc-button {
   color: var(--color-maroon);
-} 
+}

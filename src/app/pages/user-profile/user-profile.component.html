@@ -9,7 +9,7 @@
   </div>
 
   <!-- Personal Details Section -->
-  <mat-card class="profile-section">
+  <div class="profile-section">
     <mat-card-header>
       <mat-card-title class="section-title">
         Personal Details
@@ -23,7 +23,7 @@
       <div class="personal-details-form">
         <div class="form-field-main">
           <mat-label>Full Name</mat-label>
-          <mat-form-field class="form-field">
+          <div class="form-field">
             <input matInput [formControl]="fullNameFormControl" [readonly]="!isEditingPersonal">
             @if (fullNameFormControl.hasError('required')) {
             <mat-error>Full name is <strong>required</strong></mat-error>
@@ -31,12 +31,12 @@
             @if (fullNameFormControl.hasError('maxlength')) {
             <mat-error>Full name cannot exceed 50 characters</mat-error>
             }
-          </mat-form-field>
+          </div>
         </div>
 
         <div class="form-field-main">
           <mat-label>Email Id</mat-label>
-          <mat-form-field class="form-field">
+          <div class="form-field">
             <input matInput [formControl]="emailFormControl" [readonly]="!isEditingPersonal">
             @if (emailFormControl.hasError('required')) {
             <mat-error>Email is <strong>required</strong></mat-error>
@@ -44,12 +44,12 @@
             @if (emailFormControl.hasError('email')) {
             <mat-error>Please enter a valid email address</mat-error>
             }
-          </mat-form-field>
+          </div>
         </div>
 
         <div class="form-field-main">
           <mat-label>Password</mat-label>
-          <mat-form-field class="form-field">
+          <div class="form-field">
             <input matInput type="password" [formControl]="passwordFormControl" [readonly]="!isEditingPersonal">
             @if (passwordFormControl.hasError('required')) {
             <mat-error>Password is <strong>required</strong></mat-error>
@@ -57,12 +57,12 @@
             @if (passwordFormControl.hasError('minlength')) {
             <mat-error>Password must be at least 6 characters</mat-error>
             }
-          </mat-form-field>
+          </div>
         </div>
 
         <div class="form-field-main">
           <mat-label>Mobile Number</mat-label>
-          <mat-form-field class="form-field">
+          <div class="form-field">
             <input matInput [formControl]="mobileFormControl" [readonly]="!isEditingPersonal">
             @if (mobileFormControl.hasError('required')) {
             <mat-error>Mobile number is <strong>required</strong></mat-error>
@@ -70,7 +70,7 @@
             @if (mobileFormControl.hasError('pattern')) {
             <mat-error>Please enter a valid 10-digit mobile number</mat-error>
             }
-          </mat-form-field>
+          </div>
         </div>
       </div>
 
@@ -80,10 +80,10 @@
       </div>
       }
     </mat-card-content>
-  </mat-card>
+  </div>
 
   <!-- Address Details Section -->
-  <mat-card class="profile-section">
+  <div class="profile-section">
     <mat-card-header>
       <mat-card-title class="section-title">
         Address Details
@@ -136,31 +136,31 @@
       <div class="address-form">
         <h3>{{ editingAddressId ? 'Edit Address' : 'Add New Address' }}</h3>
 
-        <mat-form-field class="form-field full-width">
-          <mat-label>Address</mat-label>
+        <div class="form-field full-width">
+          <label>Address</label>
           <textarea matInput [formControl]="addressFormControl" rows="3"
             placeholder="Enter your full address"></textarea>
           @if (addressFormControl.hasError('required')) {
           <mat-error>Address is <strong>required</strong></mat-error>
           }
-        </mat-form-field>
+        </div>
 
         <div class="address-row">
-          <mat-form-field class="form-field">
-            <mat-label>City/town</mat-label>
+          <div class="form-field">
+            <label>City/town</label>
             <input matInput [formControl]="cityFormControl" placeholder="Enter city">
             @if (cityFormControl.hasError('required')) {
             <mat-error>City is <strong>required</strong></mat-error>
             }
-          </mat-form-field>
+          </div>
 
-          <mat-form-field class="form-field">
-            <mat-label>State</mat-label>
+          <div class="form-field">
+            <label>State</label>
             <input matInput [formControl]="stateFormControl" placeholder="Enter state">
             @if (stateFormControl.hasError('required')) {
             <mat-error>State is <strong>required</strong></mat-error>
             }
-          </mat-form-field>
+          </div>
         </div>
 
         <div class="address-type">
@@ -181,7 +181,7 @@
       </div>
       }
     </mat-card-content>
-  </mat-card>
+  </div>
 </div>
 
 <app-footer></app-footer>

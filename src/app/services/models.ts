@@ -61,6 +61,23 @@ export interface WishlistResponse {
   result: WishlistItem[];
 }
 
+// Cart Models
+export interface CartItem {
+  _id: string;
+  user_id: string;
+  product_id: Book;
+  quantityToBuy: number;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+}
+
+export interface CartResponse {
+  success: boolean;
+  message: string;
+  result: CartItem[];
+}
+
 export interface OrderItem {
   product_id: string;
   product_name: string;

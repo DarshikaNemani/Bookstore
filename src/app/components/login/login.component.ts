@@ -92,7 +92,18 @@ export class LoginComponent {
       this.authService.login(loginData).subscribe({
         next: (response) => {
           this.isLoading.set(false);
+          console.log('Login response:', response); // Debug log to see response structure
+          
           if (response && (response.token || response.success)) {
+            // If fullName is not in the response, we might need to fetch user profile
+            // For now, let's use the email as a fallback name
+            if (!this.authService.getUserName()) {
+              // Extract first part of email as a fallback name
+              const emailName = this.emailFormControl.value!.split('@')[0];
+              const capitalizedName = emailName.charAt(0).toUpperCase() + emailName.slice(1);
+              this.authService.setUserName(capitalizedName);
+            }
+            
             this.showSuccess('Login successful!');
             this.router.navigate(['/home']);
           } else {
@@ -130,9 +141,11 @@ export class LoginComponent {
       this.authService.signup(signupData).subscribe({
         next: (response) => {
           this.isLoading.set(false);
+          console.log('Signup response:', response); // Debug log
+          
           if (response && (response.success || response.message)) {
             this.showSuccess('Registration successful! Please login.');
-            this.router.navigate(['/home']);
+            this.login(); // Switch to login mode
           } else {
             this.showError('Registration failed. Please try again.');
           }

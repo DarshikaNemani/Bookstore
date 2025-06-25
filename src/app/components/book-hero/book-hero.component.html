@@ -13,8 +13,38 @@
           <img src="Image 7@2x.png" />
         </div>
         <div class="main-image-button-row">
-          <button class="red-button">ADD TO BAG</button>
-          <button class="wishlist-button"><i class="fa-regular fa-heart"></i>WISHLIST</button>
+
+          <!-- Debug info (remove after testing) -->
+          <div style="font-size: 10px; color: red; margin-bottom: 5px;">
+            Debug: isInCart={{ isInCart }}, cartQuantity={{ cartQuantity }}, isAddingToCart={{ isAddingToCart }}
+          </div>
+
+          <!-- Show Add to Bag button if not in cart -->
+          <button *ngIf="!isInCart" class="red-button" (click)="addToBag()"
+            [disabled]="isAddingToCart || book?.quantity === 0">
+            {{ isAddingToCart ? 'ADDING...' : (book?.quantity === 0 ? 'OUT OF STOCK' : 'ADD TO BAG') }}
+          </button>
+
+          <!-- Show quantity selector if in cart -->
+          <div *ngIf="isInCart" class="quantity-selector">
+            <button class="quantity-btn decrease-btn" (click)="decreaseQuantity()"
+              [disabled]="isUpdatingQuantity || cartQuantity <= 0">
+              <i class="fas fa-minus"></i>
+            </button>
+            <div class="quantity-display">
+              {{ cartQuantity }}
+            </div>
+            <button class="quantity-btn increase-btn" (click)="increaseQuantity()"
+              [disabled]="isUpdatingQuantity || cartQuantity >= book?.quantity">
+              <i class="fas fa-plus"></i>
+            </button>
+          </div>
+
+          <button class="wishlist-button" [class.wishlist-active]="isInWishlist" (click)="toggleWishlist()"
+            [disabled]="isWishlistLoading">
+            <i [class]="isInWishlist ? 'fas fa-heart' : 'fa-regular fa-heart'"></i>
+            {{ isWishlistLoading ? 'LOADING...' : 'WISHLIST' }}
+          </button>
         </div>
       </div>
     </div>

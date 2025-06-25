@@ -6,8 +6,9 @@
 .order-summary-container {
     border: 1px solid #DCDCDC;
     display: flex;
+    gap: 10px;
     width: 774px;
-    height: 251px;
+    min-height: 251px;
     border-radius: 1px;
     padding: 35px 20px;
     color: var(--color-text-primary);
@@ -74,7 +75,8 @@
             align-items: center;
 
             input {
-                width: 20px;
+                width: 30px;
+                text-align: center;
             }
 
             a {
@@ -97,7 +99,7 @@
 
 .order-summary-container {
 
-    height: 237px;
+    min-height: 237px;
 
     .my-cart-right-container {
         justify-content: end;

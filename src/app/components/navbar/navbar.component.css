@@ -23,7 +23,6 @@ button {
     font-size: 12px;
 }
 
-
 button i {
     font-size: 18px;
     margin-bottom: 2px;
@@ -144,4 +143,8 @@ button i {
         font-size: 10px;
         margin-right: 9.14px;
     }
+}
+
+.logged-in-dropdown{
+    cursor: pointer;
 }

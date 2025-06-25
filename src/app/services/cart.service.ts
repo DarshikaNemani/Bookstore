@@ -6,32 +6,45 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class CartService {
-  private baseUrl =
-    'https://bookstore.incubation.bridgelabz.com/bookstore_app/swagger/api/#/bookstore_user';
+  private baseUrl = 'https://bookstore.incubation.bridgelabz.com/bookstore_user';
 
   constructor(private http: HttpClient) {}
 
-  addProduct(product_id: string): Observable<any> {
+  private getHeaders() {
+    const token = localStorage.getItem('authToken') || '';
+    return {
+      'Content-Type': 'application/json',
+      'x-access-token': token,
+    };
+  }
+
+  addToCart(productId: string): Observable<any> {
     return this.http.post(
-      `${this.baseUrl}/add_cart_item/${product_id}`,
-      product_id
+      `${this.baseUrl}/add_cart_item/${productId}`,
+      {},
+      { headers: this.getHeaders() }
     );
   }
 
-  quantityProduct(cartItem_id: string, quantityToBuy: number): Observable<any> {
+  updateCartQuantity(productId: string, quantityToBuy: number): Observable<any> {
     return this.http.put(
-      `${this.baseUrl}/cart_item_quantity/${cartItem_id}`,
-      quantityToBuy
+      `${this.baseUrl}/cart_item_quantity/${productId}`,
+      { quantityToBuy },
+      { headers: this.getHeaders() }
     );
   }
 
-  removeProduct(cartItem_id: string): Observable<any> {
+  removeFromCart(productId: string): Observable<any> {
     return this.http.delete(
-      `${this.baseUrl}/cart_item_quantity/${cartItem_id}`
+      `${this.baseUrl}/remove_cart_item/${productId}`,
+      { headers: this.getHeaders() }
     );
   }
 
-  loadCartProduct(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/get_cart_items`);
+  getCartItems(): Observable<any> {
+    return this.http.get(
+      `${this.baseUrl}/get_cart_items`,
+      { headers: this.getHeaders() }
+    );
   }
 }

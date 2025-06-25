@@ -4,7 +4,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router, NavigationEnd } from '@angular/router';
-import { filter } from 'rxjs/operators';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -18,7 +18,7 @@ export class NavbarComponent {
   isHomePage = false;
   searchTerm = '';
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private authService: AuthService) {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.isHomePage = event.urlAfterRedirects === '/' || event.urlAfterRedirects === '/home';
@@ -34,5 +34,20 @@ export class NavbarComponent {
     const input = event.target as HTMLInputElement;
     this.searchTerm = input.value;
     this.searchChanged.emit(this.searchTerm);
+  }
+
+  isLoggedIn(): boolean {
+    return this.authService.isAuthenticated();
+  }
+
+  getUserDisplayName(): string {
+    const userName = this.authService.getUserName();
+    return userName ? `Hello ${userName.split(' ')[0]}` : 'Hello User';
+  }
+
+  logout(): void {
+    this.authService.logout();
+    this.isProfileOpen = false;
+    this.router.navigate(['/home']);
   }
 }
