@@ -1,0 +1,33 @@
+<div class="success-page">
+<app-navbar/>
+
+<div class="order-success-container">
+    <img class="success-2" src="success 2.png" width="170px">
+    <p class="order-success-head">Order placed successfully</p>
+    <img class="success-1" src="success 1.png" width= "98px" height = "46px">
+    <p class="order-success-content">Hurray!!! Your order is confirmed, the order id is {{orderId}}. Save the order id for
+        further communication.</p>
+    <div class="order-success-table">
+        <table>
+            <thead>
+                <th class="table-email">Email us</th>
+                <th class="table-contact-us">Contact us</th>
+                <th class="table-address">Address</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>admin&#64;bookstore.com</td>
+                    <td>+91 8163475881</td>
+                    <td>42, 14th Main, 15th Cross, Sector 4 ,opp to BDA complex, near Kumarakom restaurant, HSR Layout,
+                        Bangalore 560034</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <button class="blue-button" (click)="continueShopping()">CONTINUE SHOPPING</button>
+    </div>
+</div>
+
+<app-footer/>
+</div>

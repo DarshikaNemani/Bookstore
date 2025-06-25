@@ -1,0 +1,140 @@
+.cart-main-container {
+    margin: 0px 415px 110px 177px;
+}
+
+.my-cart-container,
+.order-summary-container {
+    border: 1px solid #DCDCDC;
+    display: flex;
+    gap: 10px;
+    width: 774px;
+    min-height: 251px;
+    border-radius: 1px;
+    padding: 35px 20px;
+    color: var(--color-text-primary);
+    justify-content: space-between;
+    margin: 17px 0px;
+}
+
+.breadcrumb {
+
+    margin: 20px 0px;
+    font-size: 14px;
+    color: #666;
+}
+
+.breadcrumb-link {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.breadcrumb-link:hover {
+    text-decoration: underline;
+}
+
+.breadcrumb-separator {
+    margin: 0 8px;
+}
+
+.breadcrumb-current {
+    color: #333;
+    font-weight: 500;
+}
+
+.my-cart-left-container {
+    display: flex;
+    flex-direction: column;
+
+    img {
+        max-width: 65px;
+        max-height: 85px;
+        margin-right: 38px;
+    }
+
+    .my-cart-title {
+        font-size: 18px;
+        margin-bottom: 40px;
+        height: 22px;
+    }
+
+    .my-cart-main {
+        display: flex;
+    }
+
+    .my-cart-details {
+        margin-bottom: 15px;
+
+        .my-cart-book-name {
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .my-cart-book-author {
+            font-size: 10px;
+            color: var(--color-text-content);
+            margin-bottom: 10px;
+        }
+
+        .my-cart-price-container {
+            margin-bottom: 25px;
+        }
+
+        .my-cart-book-discount {
+            font-size: 15px;
+            margin-bottom: 31px;
+        }
+
+        .my-cart-book-price {
+            color: var(--color-text-content);
+            font-size: 9px;
+        }
+
+        button {
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            border: 1px solid #DBDBDB;
+        }
+
+        .my-cart-book-quantity-change {
+            display: flex;
+            font-size: 12px;
+            align-items: center;
+
+            input {
+                width: 30px;
+                text-align: center;
+                margin: 0px 5px;
+                border: 1px solid #DBDBDB;
+            }
+
+            .my-cart-book-remove {
+                margin-left: 26px;
+            }
+
+            a {
+                text-decoration: none;
+                color: var(--color-text-primary);
+            }
+        }
+    }
+}
+
+.my-cart-right-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .blue-button {
+        padding: 9px 28px;
+    }
+}
+
+.order-summary-container {
+
+    min-height: 237px;
+
+    .my-cart-right-container {
+        justify-content: end;
+    }
+}

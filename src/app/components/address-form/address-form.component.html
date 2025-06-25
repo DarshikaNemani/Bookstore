@@ -1,0 +1,51 @@
+<!-- src/app/components/address-form/address-form.component.html -->
+<div class="address-form-container">
+    <div class="address-form-title-main">
+        <p class="address-form-title">Customer Details</p>
+        <button class="add-new-address-button">Add New Address</button>
+    </div>
+    <div class="address-form">
+        <div class="address-form-user-details">
+            <div class="address-form-name label-input">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" matInput [formControl]="nameFormControl" placeholder="John Doe" required>
+            </div>
+            <div class="address-form-phone label-input">
+                <label for="phone">Phone Number</label>
+                <input type="text" id="phone" matInput [formControl]="phoneFormControl" placeholder="1234567890"
+                    required>
+            </div>
+        </div>
+        <p>1. Work</p>
+        <div class="address-form-details">
+            <div class="address-form-address label-input">
+                <label for="address">Address</label>
+                <textarea id="address" matInput placeholder="BridgeLabz Solutions LLP, No. 42, 14th Main, 15th Cross, Sector 4, Opp to BDA complex, near Kumarakom restaurant, HSR Layout, Bangalore"
+                    required></textarea>
+            </div>
+            <div class="address-form-city-state">
+                <div class="address-form-city label-input">
+                    <label for="city">City/ Town</label>
+                    <input type="text" id="city" matInput [formControl]="nameFormControl" placeholder="Bengaluru"
+                        required>
+                </div>
+                <div class="address-form-state label-input">
+                    <label for="state">State</label>
+                    <input type="text" id="state" matInput [formControl]="nameFormControl" placeholder="Karnataka"
+                        required>
+                </div>
+            </div>
+        </div>
+        <mat-radio-group aria-label="Select an option">
+            <div>
+                <p class="type-title">Type</p>
+            </div>
+            <mat-radio-button value="Home">Home</mat-radio-button>
+            <mat-radio-button value="Work">Work</mat-radio-button>
+            <mat-radio-button value="Other">Other</mat-radio-button>
+        </mat-radio-group>
+    </div>
+    <div class="button-row">
+        <button class="blue-button" (click)="onContinue()">Continue</button>
+    </div>
+</div>

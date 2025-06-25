@@ -1,0 +1,187 @@
+<app-navbar></app-navbar>
+
+<div class="profile-container">
+  <!-- Breadcrumb -->
+  <div class="breadcrumb">
+    <span class="breadcrumb-item">Home</span>
+    <span class="breadcrumb-separator">/</span>
+    <span class="breadcrumb-item active">Profile</span>
+  </div>
+
+  <!-- Personal Details Section -->
+  <div class="profile-section">
+    <mat-card-header>
+      <mat-card-title class="section-title">
+        Personal Details
+        <button mat-button class="edit-button" (click)="togglePersonalEdit()">
+          {{ isEditingPersonal ? 'Cancel' : 'Edit' }}
+        </button>
+      </mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <div class="personal-details-form">
+        <div class="form-field-main">
+          <mat-label>Full Name</mat-label>
+          <div class="form-field">
+            <input matInput [formControl]="fullNameFormControl" [readonly]="!isEditingPersonal">
+            @if (fullNameFormControl.hasError('required')) {
+            <mat-error>Full name is <strong>required</strong></mat-error>
+            }
+            @if (fullNameFormControl.hasError('maxlength')) {
+            <mat-error>Full name cannot exceed 50 characters</mat-error>
+            }
+          </div>
+        </div>
+
+        <div class="form-field-main">
+          <mat-label>Email Id</mat-label>
+          <div class="form-field">
+            <input matInput [formControl]="emailFormControl" [readonly]="!isEditingPersonal">
+            @if (emailFormControl.hasError('required')) {
+            <mat-error>Email is <strong>required</strong></mat-error>
+            }
+            @if (emailFormControl.hasError('email')) {
+            <mat-error>Please enter a valid email address</mat-error>
+            }
+          </div>
+        </div>
+
+        <div class="form-field-main">
+          <mat-label>Password</mat-label>
+          <div class="form-field">
+            <input matInput type="password" [formControl]="passwordFormControl" [readonly]="!isEditingPersonal">
+            @if (passwordFormControl.hasError('required')) {
+            <mat-error>Password is <strong>required</strong></mat-error>
+            }
+            @if (passwordFormControl.hasError('minlength')) {
+            <mat-error>Password must be at least 6 characters</mat-error>
+            }
+          </div>
+        </div>
+
+        <div class="form-field-main">
+          <mat-label>Mobile Number</mat-label>
+          <div class="form-field">
+            <input matInput [formControl]="mobileFormControl" [readonly]="!isEditingPersonal">
+            @if (mobileFormControl.hasError('required')) {
+            <mat-error>Mobile number is <strong>required</strong></mat-error>
+            }
+            @if (mobileFormControl.hasError('pattern')) {
+            <mat-error>Please enter a valid 10-digit mobile number</mat-error>
+            }
+          </div>
+        </div>
+      </div>
+
+      @if (isEditingPersonal) {
+      <div class="form-actions">
+        <button mat-raised-button color="primary" (click)="savePersonalDetails()">Save</button>
+      </div>
+      }
+    </mat-card-content>
+  </div>
+
+  <!-- Address Details Section -->
+  <div class="profile-section">
+    <mat-card-header>
+      <mat-card-title class="section-title">
+        Address Details
+        <button mat-button class="add-address-button" (click)="showAddNewAddress()">
+          Add New Address
+        </button>
+      </mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <!-- Existing Addresses -->
+      @for (address of addresses; track address.id) {
+      <div class="address-item">
+        <div class="address-header">
+          <span class="address-number">{{ $index + 1 }}. {{ address.type.toUpperCase() }}</span>
+          <button mat-button class="edit-button" (click)="editAddress(address)">Edit</button>
+        </div>
+
+        <div class="address-content">
+          <div class="address-field">
+            <strong>Address</strong>
+            <p>{{ address.fullAddress }}</p>
+          </div>
+
+          <div class="address-row">
+            <div class="address-field">
+              <strong>City/town</strong>
+              <p>{{ address.city }}</p>
+            </div>
+            <div class="address-field">
+              <strong>State</strong>
+              <p>{{ address.state }}</p>
+            </div>
+          </div>
+
+          <div class="address-type">
+            <strong>Type</strong>
+            <mat-radio-group [value]="address.type" disabled>
+              <mat-radio-button value="Home">Home</mat-radio-button>
+              <mat-radio-button value="Work">Work</mat-radio-button>
+              <mat-radio-button value="Other">Other</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+      </div>
+      }
+
+      <!-- Add/Edit Address Form -->
+      @if (showAddressForm) {
+      <div class="address-form">
+        <h3>{{ editingAddressId ? 'Edit Address' : 'Add New Address' }}</h3>
+
+        <div class="form-field full-width">
+          <label>Address</label>
+          <textarea matInput [formControl]="addressFormControl" rows="3"
+            placeholder="Enter your full address"></textarea>
+          @if (addressFormControl.hasError('required')) {
+          <mat-error>Address is <strong>required</strong></mat-error>
+          }
+        </div>
+
+        <div class="address-row">
+          <div class="form-field">
+            <label>City/town</label>
+            <input matInput [formControl]="cityFormControl" placeholder="Enter city">
+            @if (cityFormControl.hasError('required')) {
+            <mat-error>City is <strong>required</strong></mat-error>
+            }
+          </div>
+
+          <div class="form-field">
+            <label>State</label>
+            <input matInput [formControl]="stateFormControl" placeholder="Enter state">
+            @if (stateFormControl.hasError('required')) {
+            <mat-error>State is <strong>required</strong></mat-error>
+            }
+          </div>
+        </div>
+
+        <div class="address-type">
+          <strong>Type</strong>
+          <mat-radio-group [formControl]="addressTypeFormControl">
+            <mat-radio-button value="Home">Home</mat-radio-button>
+            <mat-radio-button value="Work">Work</mat-radio-button>
+            <mat-radio-button value="Other">Other</mat-radio-button>
+          </mat-radio-group>
+        </div>
+
+        <div class="form-actions">
+          <button mat-raised-button color="primary" (click)="saveAddress()">
+            {{ editingAddressId ? 'Update' : 'Continue' }}
+          </button>
+          <button mat-button (click)="cancelAddressForm()">Cancel</button>
+        </div>
+      </div>
+      }
+    </mat-card-content>
+  </div>
+</div>
+
+<app-footer></app-footer>

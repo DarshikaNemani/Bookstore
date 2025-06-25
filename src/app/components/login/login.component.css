@@ -1,0 +1,249 @@
+.login-signup-main {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.login-left-container {
+  width: 338px;
+  height: 391px;
+  border-radius: 21px 0px 0px 21px;
+  background-color: #F5F5F5;
+  border: none;
+  align-items: center;
+
+  img {
+    border-radius: 50%;
+    width: 245px;
+    margin: 25px 40px 31px 53px;
+  }
+
+  p {
+    margin: 0px 58px 39px 71px;
+    font-size: 18px;
+  }
+}
+
+.login-password-input,
+.signup-password-input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .password-input {
+    border: none;
+    height: 33px;
+  }
+
+  .password-visibility-button {
+    border: none;
+    background-color: #fff;
+    height: 33px;
+    padding: 5px 11px;
+
+    mat-icon {
+      font-size: 20px;
+      color: #9D9D9D;
+    }
+  }
+}
+
+.login-right-container {
+  width: 389px;
+  height: 425px;
+  border-radius: 6px;
+  box-shadow: 0px 5px 15px #00000029;
+  border: 1px solid #E4E4E4;
+  padding: 0px 67.5px;
+
+  .button-row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 28px;
+    margin-bottom: 7px;
+
+    .button-row-login,
+    .button-row-signup {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      hr {
+        border: 2.5px solid var(--color-maroon);
+        width: 22px;
+        border-radius: 4px;
+      }
+
+      button {
+        border: none;
+        background: none;
+        color: #0A0102;
+        text-transform: uppercase;
+        font-size: 25px;
+      }
+    }
+  }
+
+  label {
+    font-size: 10px;
+    color: var(--color-text-primary);
+    display: flex;
+    justify-content: start;
+    margin-top: 15px;
+  }
+
+  input {
+    padding: 11px 10px;
+  }
+
+  input,
+  .login-password-input,
+  .signup-password-input {
+    width: 252px;
+    height: 35px;
+    margin: 0px;
+    border: 1px solid #E2E2E2;
+    border-radius: 2px;
+  }
+
+  input:focus {
+    border: 1px solid #A03037;
+    outline: none;
+  }
+
+
+  .label-input {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .login-form {
+
+    a {
+      color: #9D9D9D;
+      text-decoration: none;
+      font-size: 10px;
+      display: flex;
+      justify-content: end;
+    }
+
+    .or-class {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      margin: 26px 0px 28px 0px;
+
+      hr {
+        width: 64px;
+        color: #E1E4EA;
+      }
+    }
+
+    .login-other-options {
+      display: flex;
+      justify-content: space-between;
+
+      button {
+        height: 37px;
+        border-radius: 3px;
+      }
+
+      .facebook-button {
+        background-color: #4266B2;
+        color: #fff;
+        border: none;
+        width: 126px;
+      }
+
+      .google-button {
+        color: var(--color-primary);
+        background-color: #F5F5F5;
+        border: 1px solid #E4E4E4;
+        width: 119px;
+      }
+    }
+  }
+
+  .red-button {
+    width: 100%;
+    height: 37px;
+    background-color: var(--color-maroon);
+    color: white;
+    border: none;
+    border-radius: 3px;
+    font-size: 14px;
+    font-weight: 500;
+    margin-top: 22px;
+  }
+
+  .red-button:disabled {
+    background-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+  }
+}
+
+/* Error message styling */
+mat-error {
+  font-size: 12px;
+  color: #f44336;
+}
+
+/* Forgot password link styling */
+.forget-password-link button {
+  color: #9D9D9D;
+  text-decoration: none;
+  font-size: 10px;
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  padding: 0;
+  margin: 3px 0 -8px 0;
+  background: none;
+  border: none;
+}
+
+.forget-password-link button:hover {
+  color: var(--color-maroon);
+  text-decoration: underline;
+}
+
+.forget-password-link button:disabled {
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Loading state */
+.loading-spinner {
+  margin-right: 8px;
+}
+
+/* Form validation */
+.ng-invalid.ng-touched input {
+  border-color: #f44336;
+}
+
+.ng-valid.ng-touched input {
+  border-color: #4caf50;
+}
+
+.example-container mat-form-field+mat-form-field {
+  margin-left: 8px;
+}
+
+.example-right-align {
+  text-align: right;
+}
+
+input.example-right-align::-webkit-outer-spin-button,
+input.example-right-align::-webkit-inner-spin-button {
+  display: none;
+}
+
+input.example-right-align {
+  -moz-appearance: textfield;
+}

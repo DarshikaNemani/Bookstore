@@ -1,0 +1,66 @@
+.success-page{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+}
+
+.order-success-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.order-success-head {
+    font-size: 25px;
+    font-weight: bold;
+    margin: 15px 0px;
+}
+
+.order-success-content {
+    font-size: 18px;
+    width: 354px;
+    padding: 33px 0px 0px 19px;
+}
+
+p, th, tr {
+    color: var(--color-text-primary);
+}
+
+table {
+    border: 1px solid #DCDCDC;
+    border-collapse: collapse;
+    margin: 30px 0px ;
+
+    thead {
+        background-color: #FAFAFA;
+    }
+
+    tbody,
+    tr,
+    td {
+        flex-direction: row;
+        border: 1px solid #DCDCDC;
+    }
+
+    th,
+    td {
+        padding: 12.5px 0px;
+        font-size: 12px;
+    }
+
+    .table-email,
+    .table-contact-us {
+        width: 223px;
+        justify-content: center;
+    }
+
+    .table-address {
+        width: 305px;
+    }
+}
+.blue-button{
+    padding: 9px 26.5px;
+    font-size: 14px;
+}

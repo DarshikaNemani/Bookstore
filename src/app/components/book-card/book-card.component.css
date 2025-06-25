@@ -1,0 +1,73 @@
+.book-card-container {
+    width: 235px;
+    /* height: 275px; */
+    border: 1px solid #E2E2E2;
+    padding: 0px;
+}
+
+.book-card-image {
+    width: 233px;
+    height: 172px;
+    background-color: #F5F5F5;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;    
+}
+
+.out-of-stock-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+}
+
+.out-of-stock-text {
+    background-color: white;
+    color: #666;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 8px 16px;
+    border: 1px solid #ddd;
+    border-radius: 2px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.book-card-rating-container {
+    width: 25%;
+    background-color: #388E3C;
+    border-radius: 1px;
+    color: white;
+    padding: 2px 4px;
+    margin-right: 4px;
+
+    span {
+        font-size: 10px/13px;
+    }
+
+    .fa-star {
+        height: 4px;
+        margin-left: 2.5px;
+    }
+}
+
+.book-card-price,
+.book-card-rating-number,
+.book-card-author {
+    font-size: 10px;
+    color: #878787;
+}
+
+.book-card-details {
+    padding: 10px 20px 16px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}

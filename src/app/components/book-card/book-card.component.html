@@ -1,0 +1,25 @@
+<div class="book-card-container" (click)="onProductClick()" style="cursor: pointer;">
+    <div class="book-card-image">
+        <img [src]="book?.bookImage || 'Image 7.png'" alt="{{book?.bookName || 'Book Image'}}">
+        <div *ngIf="book?.quantity === 0" class="out-of-stock-overlay">
+            <span class="out-of-stock-text">OUT OF STOCK</span>
+        </div>
+    </div>
+    <div class="book-card-details">
+        <p class="book-card-name">{{ book?.bookName || 'Unknown Title' }}</p>
+        <p class="book-card-author">by {{ book?.author || 'Unknown Author' }}</p>
+        <div class="book-card-rating-main">
+            <span class="book-card-rating-container">
+                <span class="book-card-rating">4.5</span>
+                <span><i class="fas fa-star fa-2xs"></i></span>
+            </span>
+            <span class="book-card-rating-number">(20)</span>
+        </div>
+        <div class="book-card-price-container">
+            <span class="book-card-discount">Rs {{ book?.discountPrice || book?.price || 0 }} </span>
+            <span class="book-card-price" *ngIf="book?.discountPrice !== book?.price && book?.discountPrice !== 0">
+                <del>Rs {{ book?.price || 0 }}</del>
+            </span>
+        </div>
+    </div>
+</div>

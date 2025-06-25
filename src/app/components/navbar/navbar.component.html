@@ -1,0 +1,73 @@
+<!-- src/app/components/navbar/navbar.component.html -->
+<nav>
+    <span class="nav-brand-search-container">
+        <span class="nav-brand-container" routerLink="/home">
+            <img alt="logo" src="education.svg">
+            <span class="nav-title">Bookstore</span>
+        </span>
+        <div class="nav-search-container">
+            <i class="fas fa-search nav-search-icon"></i>
+            <input type="search" placeholder="Search ..." class="nav-search-input" [disabled]="!isHomePage"
+                [value]="searchTerm" (input)="onSearchChange($event)">
+        </div>
+    </span>
+    <span class="nav-icon-group">
+        <div class="nav-profile-container">
+            <button class="nav-profile-button" (click)="toggleProfileDropdown()">
+                <i class="fa-regular fa-user"></i>
+                <span *ngIf="isLoggedIn()">{{ getUserDisplayName().split(' ')[1] }}</span>
+                <span *ngIf="!isLoggedIn()">Profile</span>
+            </button>
+
+            <!-- Profile Dropdown Modal -->
+            <div *ngIf="isProfileOpen" class="profile-dropdown">
+                <!-- Not Logged In Dropdown -->
+                <div *ngIf="!isLoggedIn()" class="not-logged-in-dropdown">
+                    <p class="profile-dropdown-welcome">Welcome</p>
+                    <p class="profile-dropdown-content">To access account and manage orders</p>
+                    <button [routerLink]="['/login']" routerLinkActive="router-link-active"
+                        (click)="isProfileOpen = false">LOGIN/SIGNUP</button>
+                    <hr>
+                    <div routerLink="/myorders" (click)="isProfileOpen = false" class="dropdown-item">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <span>My Orders</span>
+                    </div>
+                    <div routerLink="/wishlist" (click)="isProfileOpen = false" class="dropdown-item">
+                        <i class="fa-regular fa-heart"></i>
+                        <span>Wishlist</span>
+                    </div>
+                </div>
+
+                <!-- Logged In Dropdown -->
+                <div *ngIf="isLoggedIn()" class="logged-in-dropdown">
+                    <p class="profile-dropdown-welcome">{{ getUserDisplayName() }}</p>
+                    <hr>
+                    <div routerLink="/user" (click)="isProfileOpen = false" class="dropdown-item">
+                        <i class="fa-regular fa-user"></i>
+                        <span>Profile</span>
+                    </div>
+                    <div routerLink="/myorders" (click)="isProfileOpen = false" class="dropdown-item">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <span>My Orders</span>
+                    </div>
+                    <div routerLink="/wishlist" (click)="isProfileOpen = false" class="dropdown-item">
+                        <i class="fa-regular fa-heart"></i>
+                        <span>Wishlist</span>
+                    </div>
+                    <button (click)="logout()" class="logout-button">LOGOUT</button>
+                </div>
+            </div>
+        </div>
+
+        <button class="nav-cart-button" routerLink="/order" (click)="updateCartCount()">
+            <div class="cart-icon-container">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span *ngIf="isLoggedIn() && cartItemCount > 0" class="cart-badge">{{ cartItemCount }}</span>
+            </div>
+            Cart
+        </button>
+    </span>
+</nav>
+
+<!-- Backdrop for modal -->
+<div *ngIf="isProfileOpen" class="profile-backdrop" (click)="closeProfileDropdown()"></div>

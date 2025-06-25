@@ -1,1 +1,56 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
+
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+:root {
+    --font-roboto: 'Roboto', sans-serif;
+    --color-maroon: #A03037;
+    --color-black: #2E1D1E;
+    --color-blue: #3371B5;
+    --color-grey: #878787;
+    --color-text-content: #707070;
+    --color-text-primary: #0A0102;
+}
+
+body {
+    font-family: var(--font-roboto);
+    /* background-color: #000; */
+}
+
+.blue-button{
+    background-color: #3371B5;
+    color: #fff;
+    border: none;
+    border-radius: 2px;
+}
+
+.red-button{
+    background-color: #A03037;
+    color: #fff;
+    border: none;
+    border-radius: 2px;
+}
+.out-of-stock{
+    box-shadow: 0px 3px 6px #00000029;
+    color: #0B0203;
+    background-color: #FFFFFF;
+    opacity: 96%;
+    border: none;
+}
+
+/* Snackbar styles */
+.success-snackbar {
+    background-color: #4caf50 !important;
+    color: white !important;
+}
+
+.error-snackbar {
+    background-color: #f44336 !important;
+    color: white !important;
+}
