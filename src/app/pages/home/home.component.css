@@ -20,6 +20,7 @@
   display: flex;
   justify-content: space-between;
 }
+
 #sort-by {
   width: 161px;
   height: 30px;
@@ -27,15 +28,6 @@
   color: var(--color-text-primary);
   padding: 7px 15px;
   font-size: 12px;
-  border-radius: 1px;
-option {
-  border: 1px solid pink;
-}
-}
-
-
-
-option {
   border-radius: 1px;
 }
 
