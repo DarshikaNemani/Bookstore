@@ -1,3 +1,4 @@
+<!-- src/app/pages/home/home.component.html -->
 <app-navbar (searchChanged)="onSearchChanged($event)" />
 <div class="home-container">
     <!-- Loading State -->
@@ -8,7 +9,17 @@
 
     <!-- Content State -->
     <div *ngIf="!isLoading">
-        <p>Books<span>({{totalItems}} items)</span></p>
+        <div class="home-page-top-row">
+            <p>Books<span>({{totalItems}} items)</span></p>
+            <div class="home-page-sort-by">
+                <select name="sort-by" id="sort-by" [(ngModel)]="selectedSort" (change)="onSortChanged($event)">
+                    <option value="default" >Sort by relevance</option>
+                    <option value="price-low-to-high">Price : Low to High</option>
+                    <option value="price-high-to-low">Price : High to Low</option>
+                    <option value="new-arrivals">Newest Arrivals</option>
+                </select>
+            </div>
+        </div>
         <div class="home-book-container">
             <app-book-card *ngFor="let book of displayedBooks" [book]="book" />
         </div>
