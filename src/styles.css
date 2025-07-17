@@ -20,7 +20,6 @@
 
 body {
     font-family: var(--font-roboto);
-    /* background-color: #000; */
 }
 
 .blue-button{
@@ -44,7 +43,6 @@ body {
     border: none;
 }
 
-/* Snackbar styles */
 .success-snackbar {
     background-color: #4caf50 !important;
     color: white !important;

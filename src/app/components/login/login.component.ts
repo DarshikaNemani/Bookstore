@@ -99,7 +99,6 @@ export class LoginComponent implements OnInit {
           if (response && response.success) {
             this.showSuccess('Login successful!');
 
-            // Since login API doesn't return fullName, always fetch user profile
             this.authService.getUserProfile().subscribe({
               next: (profileResponse) => {
                 this.isLoading.set(false);
@@ -108,7 +107,6 @@ export class LoginComponent implements OnInit {
               error: (profileError) => {
                 console.error('Error fetching user profile:', profileError);
                 this.isLoading.set(false);
-                // Still navigate to home even if profile fetch fails
                 this.router.navigate(['/home']);
               },
             });

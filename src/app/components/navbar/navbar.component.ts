@@ -44,7 +44,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
         this.isHomePage =
           event.urlAfterRedirects === '/' ||
           event.urlAfterRedirects === '/home';
-        // Close profile dropdown when navigating to a new page
         this.isProfileOpen = false;
       }
     });
@@ -60,7 +59,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
       }
     );
 
-    // Load user profile if user is already logged in (e.g., page refresh)
     if (this.isLoggedIn() && !this.authService.getUserName()) {
       this.authService.getUserProfile().subscribe({
         next: (response) => {

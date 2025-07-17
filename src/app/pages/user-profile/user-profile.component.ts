@@ -43,7 +43,6 @@ interface Address {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserProfileComponent {
-  // Personal Details Form Controls
   fullNameFormControl = new FormControl('Poonam Yadav', [
     Validators.required,
     Validators.maxLength(50),
@@ -64,19 +63,16 @@ export class UserProfileComponent {
     Validators.pattern(/^\d{10}$/),
   ]);
 
-  // Address Form Controls
   addressFormControl = new FormControl('', [Validators.required]);
   cityFormControl = new FormControl('', [Validators.required]);
   stateFormControl = new FormControl('', [Validators.required]);
   addressTypeFormControl = new FormControl('Work', [Validators.required]);
 
-  // Component state
   isEditingPersonal = false;
   isEditingAddress = false;
   showAddressForm = false;
   editingAddressId: number | null = null;
 
-  // Sample addresses data
   addresses: Address[] = [
     {
       id: 1,
@@ -87,11 +83,9 @@ export class UserProfileComponent {
     }
   ];
 
-  // Personal Details Methods
   togglePersonalEdit() {
     this.isEditingPersonal = !this.isEditingPersonal;
     if (!this.isEditingPersonal) {
-      // Reset form values if canceling edit
       this.resetPersonalForm();
     }
   }
@@ -101,7 +95,6 @@ export class UserProfileComponent {
         this.emailFormControl.valid && 
         this.mobileFormControl.valid) {
       this.isEditingPersonal = false;
-      // Here you would typically save to a service
       console.log('Personal details saved');
     }
   }
@@ -112,7 +105,6 @@ export class UserProfileComponent {
     this.mobileFormControl.setValue('81678954778');
   }
 
-  // Address Methods
   showAddNewAddress() {
     this.showAddressForm = true;
     this.editingAddressId = null;
@@ -142,13 +134,11 @@ export class UserProfileComponent {
       };
 
       if (this.editingAddressId) {
-        // Update existing address
         const index = this.addresses.findIndex(addr => addr.id === this.editingAddressId);
         if (index !== -1) {
           this.addresses[index] = addressData;
         }
       } else {
-        // Add new address
         this.addresses.push(addressData);
       }
 

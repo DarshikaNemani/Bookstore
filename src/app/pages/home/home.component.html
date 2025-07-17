@@ -1,13 +1,10 @@
-<!-- src/app/pages/home/home.component.html -->
 <app-navbar (searchChanged)="onSearchChanged($event)" />
 <div class="home-container">
-    <!-- Loading State -->
     <div *ngIf="isLoading" class="loader-container">
         <mat-spinner diameter="50"></mat-spinner>
         <p>Loading books...</p>
     </div>
 
-    <!-- Content State -->
     <div *ngIf="!isLoading">
         <div class="home-page-top-row">
             <p>Books<span>({{totalItems}} items)</span></p>

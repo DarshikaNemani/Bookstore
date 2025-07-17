@@ -11,7 +11,7 @@ import { FooterComponent } from "../footer/footer.component";
   styleUrl: './order-success.component.css'
 })
 export class OrderSuccessComponent {
-  orderId = '#' + Math.floor(Math.random() * 1000000); // Generate random order ID
+  orderId = '#' + Math.floor(Math.random() * 1000000);
 
   constructor(private router: Router) {}
 

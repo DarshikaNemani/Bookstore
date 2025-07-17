@@ -61,7 +61,6 @@ export interface WishlistResponse {
   result: WishlistItem[];
 }
 
-// Cart Models
 export interface CartItem {
   _id: string;
   user_id: string;

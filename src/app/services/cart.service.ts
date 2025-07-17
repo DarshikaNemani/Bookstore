@@ -10,7 +10,6 @@ export class CartService {
   private baseUrl =
     'https://bookstore.incubation.bridgelabz.com/bookstore_user';
 
-  // Add a subject to notify about cart changes
   private cartUpdatedSubject = new BehaviorSubject<boolean>(false);
   public cartUpdated$ = this.cartUpdatedSubject.asObservable();
 
@@ -61,7 +60,6 @@ export class CartService {
     });
   }
 
-  // Method to notify all subscribers that cart has been updated
   private notifyCartUpdate(): void {
     this.cartUpdatedSubject.next(true);
   }

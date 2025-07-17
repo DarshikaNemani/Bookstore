@@ -1,9 +1,10 @@
 .feedback-main {
 
-  .feedback-container-title{
+  .feedback-container-title {
     font-size: 18px;
     color: var(--color-primary);
   }
+
   i {
     width: 20px;
     height: 20px;
@@ -40,46 +41,39 @@
       font-size: 14px;
     }
   }
-  .feedback-display{
-    .feedback-item{
+
+  .feedback-display {
+    .feedback-item {
       display: flex;
 
     }
-    .feedback-username-details{
+
+    .feedback-username-details {
       display: flex;
       align-items: top;
     }
-    img{
+
+    img {
       border-radius: 50%;
       width: 27px;
       height: 27px;
       margin-right: 8px;
     }
-    .feedback-username{
+
+    .feedback-username {
       font-size: 15px;
       color: var(--color-primary);
       margin-bottom: 8px;
       padding: 3px 0px;
     }
-    .user-feedback-review{
+
+    .user-feedback-review {
       color: #707070;
       font-size: 12px;
-      margin: 13px 0px 14px 0px; 
+      margin: 13px 0px 14px 0px;
     }
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 .feedback-form {
   min-width: 150px;

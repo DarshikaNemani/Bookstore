@@ -69,7 +69,6 @@
       }
     }
 
-    /* Quantity Selector Styles */
     .quantity-selector {
       display: flex;
       align-items: center;
@@ -211,7 +210,6 @@
   }
 }
 
-/* Responsive adjustments */
 @media (max-width: 768px) {
   .main-image-button-row {
     flex-direction: column;

@@ -55,11 +55,9 @@ export class FeedbackComponent implements OnInit{
         this.isSubmit = false;
         console.log('Feedback Submitted', response);
 
-        // Reset form
         this.bookRating = 0;
         this.reviewContent = '';
         
-        // Reload feedbacks to show the new one
         this.loadFeedbacks();
       },
       error: (error) => {

@@ -1,5 +1,4 @@
-// src/app/components/address-form/address-form.component.ts
-import { Component, ChangeDetectionStrategy, signal, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import {
   FormControl,
   Validators,
@@ -8,7 +7,7 @@ import {
 } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon'; 
+import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
 import { MatRadioModule } from '@angular/material/radio';

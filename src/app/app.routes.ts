@@ -1,4 +1,3 @@
-// src/app/app.routes.ts
 import { Routes } from '@angular/router';
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 import { HomeComponent } from './pages/home/home.component';
@@ -6,11 +5,9 @@ import { LoginPageComponent } from './pages/login/login.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { WishlistComponent } from './pages/wishlist/wishlist.component';
 import { authGuard } from './guards/auth.guard';
-import { DevComponent } from './pages/dev/dev.component';
 import { BookComponent } from './pages/book/book.component';
 import { OrderComponent } from './pages/order/order.component';
 import { OrderSuccessComponent } from './components/order-success/order-success.component';
-import { AddressFormComponent } from './components/address-form/address-form.component';
 import { MyOrdersComponent } from './pages/my-orders/my-orders.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 
