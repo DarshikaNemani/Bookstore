@@ -14,13 +14,11 @@
         </div>
         <div class="main-image-button-row">
 
-          <!-- Show Add to Bag button if not in cart -->
           <button *ngIf="!isInCart" class="red-button" (click)="addToBag()"
             [disabled]="isAddingToCart || book?.quantity === 0">
             {{ isAddingToCart ? 'ADDING...' : (book?.quantity === 0 ? 'OUT OF STOCK' : 'ADD TO BAG') }}
           </button>
 
-          <!-- Show quantity selector if in cart -->
           <div *ngIf="isInCart" class="quantity-selector">
             <button class="quantity-btn decrease-btn" (click)="decreaseQuantity()"
               [disabled]="isUpdatingQuantity || cartQuantity <= 0">

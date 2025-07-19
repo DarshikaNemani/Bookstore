@@ -21,7 +21,6 @@ export class BookHeroComponent implements OnInit {
   isInWishlist = false;
   wishlistItems: any[] = [];
 
-  // Cart-related properties
   isInCart = false;
   cartQuantity = 0;
   isUpdatingQuantity = false;

@@ -39,7 +39,6 @@ export class AuthService {
           success?: boolean;
         };
 
-        // Login API only returns accessToken, no fullName
         if (
           typedResponse &&
           typedResponse.result &&
@@ -58,7 +57,6 @@ export class AuthService {
     );
   }
 
-  // Get user profile - this will provide the fullName
   getUserProfile(): Observable<any> {
     const headers = this.getAuthHeaders();
     return this.http
@@ -74,7 +72,6 @@ export class AuthService {
           };
 
           if (typedResponse && typedResponse.success && typedResponse.result) {
-            // Try different possible paths for fullName in profile response
             const fullName =
               typedResponse.result.fullName ||
               typedResponse.result.user?.fullName;
@@ -95,7 +92,6 @@ export class AuthService {
     };
   }
 
-  // Token management methods
   setToken(token: string): void {
     localStorage.setItem('authToken', token);
   }
@@ -108,7 +104,6 @@ export class AuthService {
     localStorage.removeItem('authToken');
   }
 
-  // Username management methods
   setUserName(fullName: string): void {
     localStorage.setItem('userName', fullName);
   }
@@ -121,13 +116,11 @@ export class AuthService {
     localStorage.removeItem('userName');
   }
 
-  // Check if user is authenticated
   isAuthenticated(): boolean {
     const token = this.getToken();
     return !!token;
   }
 
-  // Logout method
   logout(): void {
     this.removeToken();
     this.removeUserName();

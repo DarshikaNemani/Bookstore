@@ -1,4 +1,3 @@
-// src/app/pages/order/order.component.ts
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -29,7 +28,6 @@ export class OrderComponent implements OnInit, OnDestroy {
   removingItems: Set<number> = new Set();
   updatingItems: Set<number> = new Set();
 
-  // Step management
   currentStep = 1;
   isCartCompleted = false;
   isAddressCompleted = false;

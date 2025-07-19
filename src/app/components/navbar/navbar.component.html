@@ -19,9 +19,7 @@
                 <span *ngIf="!isLoggedIn()">Profile</span>
             </button>
 
-            <!-- Profile Dropdown Modal -->
             <div *ngIf="isProfileOpen" class="profile-dropdown">
-                <!-- Not Logged In Dropdown -->
                 <div *ngIf="!isLoggedIn()" class="not-logged-in-dropdown">
                     <p class="profile-dropdown-welcome">Welcome</p>
                     <p class="profile-dropdown-content">To access account and manage orders</p>
@@ -38,7 +36,6 @@
                     </div>
                 </div>
 
-                <!-- Logged In Dropdown -->
                 <div *ngIf="isLoggedIn()" class="logged-in-dropdown">
                     <p class="profile-dropdown-welcome">{{ getUserDisplayName() }}</p>
                     <hr>
@@ -69,5 +66,4 @@
     </span>
 </nav>
 
-<!-- Backdrop for modal -->
 <div *ngIf="isProfileOpen" class="profile-backdrop" (click)="closeProfileDropdown()"></div>
