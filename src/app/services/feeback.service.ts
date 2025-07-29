@@ -7,7 +7,7 @@ import { AuthService } from './auth.service';
   providedIn: 'root',
 })
 export class FeebackService {
-  private baseUrl = 'https://bookstore.incubation.bridgelabz.com';
+  private baseUrl = 'https://bookstore-proxy-pearl.vercel.app/api';
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 

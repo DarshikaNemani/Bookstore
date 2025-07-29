@@ -8,7 +8,7 @@ import { Book, ProductsResponse } from './models';
 })
 export class ProductService {
   private baseUrl =
-    'https://bookstore.incubation.bridgelabz.com';
+    'https://bookstore-proxy-pearl.vercel.app/api';
 
   constructor(private http: HttpClient) { }
 

@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class HttpService {
-  private baseUrl = 'https://bookstore.incubation.bridgelabz.com';
+  private baseUrl = 'https://bookstore-proxy-pearl.vercel.app/api';
 
   constructor(private http: HttpClient) {}
 

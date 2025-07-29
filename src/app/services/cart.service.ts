@@ -8,7 +8,7 @@ import { tap } from 'rxjs/operators';
 })
 export class CartService {
   private baseUrl =
-    'https://bookstore.incubation.bridgelabz.com/bookstore_user';
+    'https://bookstore-proxy-pearl.vercel.app/api/bookstore_user';
 
   private cartUpdatedSubject = new BehaviorSubject<boolean>(false);
   public cartUpdated$ = this.cartUpdatedSubject.asObservable();

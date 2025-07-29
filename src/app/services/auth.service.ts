@@ -7,7 +7,7 @@ import { tap } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class AuthService {
-  private baseUrl = 'https://bookstore.incubation.bridgelabz.com';
+  private baseUrl = 'https://bookstore-proxy-pearl.vercel.app/api';
 
   constructor(private http: HttpClient) {}
 
